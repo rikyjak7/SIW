@@ -7,28 +7,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Specie {
+public class Famiglia {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String nome;
 	private String descrizione;
-	private String nazionalità;
 	
-	@ManyToOne
-	private Ambiente ambienteOspitante;
-	
-	@OneToMany(mappedBy="animal_specie")
-	private List<Animale> animali;
+	@OneToMany
+	private List<Specie> specie;
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(ambienteOspitante, nazionalità);
+		return Objects.hash(specie);
 	}
 
 	@Override
@@ -39,9 +34,8 @@ public class Specie {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Specie other = (Specie) obj;
-		return Objects.equals(ambienteOspitante, other.ambienteOspitante)
-				&& Objects.equals(nazionalità, other.nazionalità);
+		Famiglia other = (Famiglia) obj;
+		return Objects.equals(specie, other.specie);
 	}
 
 	public Long getId() {
@@ -68,27 +62,11 @@ public class Specie {
 		this.descrizione = descrizione;
 	}
 
-	public String getNazionalità() {
-		return nazionalità;
+	public List<Specie> getSpecie() {
+		return specie;
 	}
 
-	public void setNazionalità(String nazionalità) {
-		this.nazionalità = nazionalità;
-	}
-
-	public Ambiente getAmbienteOspitante() {
-		return ambienteOspitante;
-	}
-
-	public void setAmbienteOspitante(Ambiente ambienteOspitante) {
-		this.ambienteOspitante = ambienteOspitante;
-	}
-
-	public List<Animale> getAnimali() {
-		return animali;
-	}
-
-	public void setAnimali(List<Animale> animali) {
-		this.animali = animali;
+	public void setSpecie(List<Specie> specie) {
+		this.specie = specie;
 	}
 }
