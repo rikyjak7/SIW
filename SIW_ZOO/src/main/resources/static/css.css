@@ -97,7 +97,7 @@ div.descrizione {
   height: 600px;
 }
 
-.card.hover{
+.card:hover{
   transform: scale(1.05,1.05);
   transition: all 0.3s ease-in-out;
   z-index: 1;
@@ -109,18 +109,29 @@ div.descrizione {
   align-items: center;
   height: 200px;
   width: 100%;
-  margin-top: 2%;
+  margin-top: 15%;
 }
 
 .left-box {
-  flex: 2;
+  /*flex: 2;*/
+  height: 400px;
+  width: 400px;
+  background-color: aliceblue; 
+  border-radius: 5px; 
+  box-shadow: 5px 5px 5px black;
 }
 
 .right-box {
-  flex: 1;
+  /*flex: 1;*/
+  height: 500px;
+  width: 450px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: aliceblue; 
+  border-radius: 5px; 
+  box-shadow: 5px 5px 5px black;
+  padding: 10px;
 }
 
 .info-box {
