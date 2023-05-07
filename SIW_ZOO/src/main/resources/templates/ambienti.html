@@ -7,13 +7,15 @@
 <body class="ambienti">
 <header th:replace="header.html::intestazione">header</header>
 
-<div class="container">
-	<div class="box">
-		<a>NOME AMBIENTE</a>
+<div class="container" >
+	<ul>
+	<div class="box" th:each="ambiente : ${ambienti}">
+		<a th:href="@{'/ambienti/' + ${ambiente.id}}" th:text="${ambiente.nome}">NOME AMBIENTE</a>
 	</div>
+	</ul>
 </div>
 <div class="button"> 
-	<a>aggiungi ambiente</a>
+	<a href="/formAddAmbiente">aggiungi ambiente</a>
 </div>
 </body>
 </html>

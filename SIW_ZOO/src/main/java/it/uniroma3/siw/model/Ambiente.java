@@ -18,7 +18,7 @@ public class Ambiente{
 	private Long id;
 	private String nome;
 	private String image;
-	private Integer grandezzaInMQ;
+	private Integer superficie;
 	private String descrizione;
 	
 	@OneToOne
@@ -32,7 +32,7 @@ public class Ambiente{
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(grandezzaInMQ);
+		return Objects.hash(superficie);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class Ambiente{
 		if (getClass() != obj.getClass())
 			return false;
 		Ambiente other = (Ambiente) obj;
-		return Objects.equals(grandezzaInMQ, other.grandezzaInMQ);
+		return Objects.equals(superficie, other.superficie);
 	}
 
 	public Long getId() {
@@ -71,12 +71,12 @@ public class Ambiente{
 		this.image = image;
 	}
 	
-	public Integer getGrandezzaInMQ() {
-		return grandezzaInMQ;
+	public Integer getSuperficie() {
+		return superficie;
 	}
 	
-	public void setGrandezzaInMQ(Integer grandezzaInMQ) {
-		this.grandezzaInMQ = grandezzaInMQ;
+	public void setSuperficie(Integer superficie) {
+		this.superficie = superficie;
 	}
 	
 	public String getDescrizione() {

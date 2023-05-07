@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/stile.css" />
+  </head>
+  <body>
+    <h1>Aggiungi un nuovo ambiente</h1>
+    <form th:action="@{/elencoSpecie}" method="POST" th:object="${specie}">
+      <div>
+        <span th:text="${messaggioErrore}">Errore</span>
+      </div>
+      <div>
+       <h2> Nome: <span ><input required type="text" th:field="${specie.nome}"/> </h2></span>
+      </div>
+      <div>
+       <h2> Provenienza: <span ><input required type="text" th:field="${specie.provenienza}"/></h2></span>
+      </div>
+	  <div>
+       <h2>descrizione: <span><input type="text" th:field="${specie.descrizione}" /></span></h2>
+      </div>
+      <div>
+        <span><button type="submit">Conferma</button></span>
+      </div>
+    </form>
+  </body>
+</html>

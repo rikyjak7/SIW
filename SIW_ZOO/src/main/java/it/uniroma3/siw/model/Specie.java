@@ -18,62 +18,44 @@ public class Specie {
 	private Long id;
 	private String nome;
 	private String descrizione;
-	private String nazionalità;
+	private String provenienza;
 	
 	@ManyToOne
 	private Ambiente ambienteOspitante;
 	
 	@OneToMany(mappedBy="animal_specie")
 	private List<Animale> animali;
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(ambienteOspitante, nazionalità);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Specie other = (Specie) obj;
-		return Objects.equals(ambienteOspitante, other.ambienteOspitante)
-				&& Objects.equals(nazionalità, other.nazionalità);
-	}
 
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public String getDescrizione() {
 		return descrizione;
 	}
-	
+
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
 
-	public String getNazionalità() {
-		return nazionalità;
+	public String getProvenienza() {
+		return provenienza;
 	}
 
-	public void setNazionalità(String nazionalità) {
-		this.nazionalità = nazionalità;
+	public void setProvenienza(String provenienza) {
+		this.provenienza = provenienza;
 	}
 
 	public Ambiente getAmbienteOspitante() {
@@ -91,4 +73,25 @@ public class Specie {
 	public void setAnimali(List<Animale> animali) {
 		this.animali = animali;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(ambienteOspitante, animali, descrizione, id, nome, provenienza);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Specie other = (Specie) obj;
+		return Objects.equals(ambienteOspitante, other.ambienteOspitante) && Objects.equals(animali, other.animali)
+				&& Objects.equals(descrizione, other.descrizione) && Objects.equals(id, other.id)
+				&& Objects.equals(nome, other.nome) && Objects.equals(provenienza, other.provenienza);
+	}
+	
+	
 }

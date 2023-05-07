@@ -12,37 +12,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.repository.*;
 import it.uniroma3.siw.model.Ambiente;
+import it.uniroma3.siw.model.Specie;
 import jakarta.validation.Valid;
 
 
 @Controller
-public class AmbienteController{
+public class SpecieController{
 	
-@Autowired AmbienteRepository ambienteRepository;	
+@Autowired SpecieRepository specieRepository;	
 	
-@GetMapping("/ambienti")
-public String login(Model model) {
-	model.addAttribute("ambienti",this.ambienteRepository.findAll());
-  return "ambienti.html";
-}
-
-@PostMapping("/ambienti")
-public String addAmbiente( @ModelAttribute("ambiente") Ambiente ambiente,Model model){
+@PostMapping("/ambiente")
+public String addSpecie( @ModelAttribute("specie") Specie specie,Model model){
      
-	this.ambienteRepository.save(ambiente);
-	model.addAttribute("ambiente", ambiente);    
-	return "ambiente.html";
+	this.specieRepository.save(specie);
+	model.addAttribute("ambiente", specie);    
+	return "specie.html";
 }   
 
-@GetMapping("/ambienti/{id}")
+@GetMapping("/specie/{id}")
 public String ambiente(@PathVariable("id") Long id,Model model) {
-	model.addAttribute("ambiente",this.ambienteRepository.findById(id).get());
-  return "ambiente.html";
+	model.addAttribute("ambiente",this.specieRepository.findById(id).get());
+  return "specie.html";
 }
-@GetMapping("/formAddAmbiente")
-public String formAddAmbiente(Model model) {
-model.addAttribute("ambiente", new Ambiente());
-return "formAddAmbiente.html";
+@GetMapping("/formAddSpecie")
+public String formNewMovie(Model model) {
+model.addAttribute("specie", new Ambiente());
+return "formAddSpecie.html";
 }
 
 
