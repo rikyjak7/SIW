@@ -25,18 +25,18 @@ public class SpecieController{
 public String addSpecie( @ModelAttribute("specie") Specie specie,Model model){
      
 	this.specieRepository.save(specie);
-	model.addAttribute("ambiente", specie);    
+	model.addAttribute("specie", specie);    
 	return "specie.html";
 }   
 
 @GetMapping("/specie/{id}")
 public String ambiente(@PathVariable("id") Long id,Model model) {
-	model.addAttribute("ambiente",this.specieRepository.findById(id).get());
+	model.addAttribute("specie",this.specieRepository.findById(id).get());
   return "specie.html";
 }
 @GetMapping("/formAddSpecie")
 public String formNewMovie(Model model) {
-model.addAttribute("specie", new Ambiente());
+model.addAttribute("specie", new Specie());
 return "formAddSpecie.html";
 }
 

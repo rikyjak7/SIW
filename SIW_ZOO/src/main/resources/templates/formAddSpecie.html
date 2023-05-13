@@ -4,8 +4,8 @@
     <link rel="stylesheet" href="/stile.css" />
   </head>
   <body>
-    <h1>Aggiungi un nuovo ambiente</h1>
-    <form th:action="@{/elencoSpecie}" method="POST" th:object="${specie}">
+    <h1>Aggiungi una nuova specie a questo ambiente</h1>
+    <form th:action="@{'/ambiente' }" method="POST" th:object="${specie}">
       <div>
         <span th:text="${messaggioErrore}">Errore</span>
       </div>
