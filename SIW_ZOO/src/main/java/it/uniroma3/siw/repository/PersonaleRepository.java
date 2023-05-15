@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import it.uniroma3.siw.model.Ambiente;
+import it.uniroma3.siw.model.Personale;
 
-public interface AmbienteRepository extends CrudRepository<Ambiente,Long>{
+public interface PersonaleRepository extends CrudRepository<Personale,Long>{
 
 }

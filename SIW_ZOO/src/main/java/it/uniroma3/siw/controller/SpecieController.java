@@ -19,27 +19,24 @@ import jakarta.validation.Valid;
 @Controller
 public class SpecieController{
 	
-@Autowired SpecieRepository specieRepository;	
+	@Autowired SpecieRepository specieRepository;	
 	
-@PostMapping("/ambiente")
-public String addSpecie( @ModelAttribute("specie") Specie specie,Model model){
-     
-	this.specieRepository.save(specie);
-	model.addAttribute("specie", specie);    
-	return "specie.html";
-}   
-
-@GetMapping("/specie/{id}")
-public String ambiente(@PathVariable("id") Long id,Model model) {
-	model.addAttribute("specie",this.specieRepository.findById(id).get());
-  return "specie.html";
-}
-@GetMapping("/formAddSpecie")
-public String formNewMovie(Model model) {
-model.addAttribute("specie", new Specie());
-return "formAddSpecie.html";
-}
-
-
-
+	@PostMapping("/ambiente")
+	public String addSpecie( @ModelAttribute("specie") Specie specie,Model model){
+		this.specieRepository.save(specie);
+		model.addAttribute("specie", specie);
+		return "specie.html";
+	}   
+	
+	@GetMapping("/specie/{id}")
+	public String ambiente(@PathVariable("id") Long id,Model model) {
+		model.addAttribute("specie",this.specieRepository.findById(id).get());
+		return "specie.html";
+	}
+	
+	@GetMapping("/formAddSpecie")
+	public String formNewMovie(Model model) {
+		model.addAttribute("specie", new Specie());
+		return "formAddSpecie.html";
+	}
 }

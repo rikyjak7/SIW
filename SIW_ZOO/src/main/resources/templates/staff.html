@@ -9,9 +9,14 @@
 <div class="container">
   <div class="left-section">
 	  <h1>DIPENDENTI</h1>
-    <div class="employee-box"><a href="/dipendente">Dipendente 1</a> </div>
-    <div class="employee-box">Dipendente 2</div>
-    <div class="employee-box">Dipendente 3</div>
+	  <div th:if="${personale.isEmpty()}">Non ci sono dipendenti nel sistema</div>
+    <div class="employee-box" th:each="personale : ${personale}">
+		<a th:href="@{'/personale' + '/' + ${personale.id}}">
+			<h3 th:text="${personale.name} + ' ' + ${personale.surname} ">Dipendente 1</h3>
+		</a> </div>
+    <div class="button"> 
+	  <a href="/formAddDipendente">aggiungi dipendente</a>
+    </div>
   </div>
   <div class="right-section">
       <h1>RESPONSABILI</h1>
