@@ -39,4 +39,10 @@ public class SpecieController{
 		model.addAttribute("specie", new Specie());
 		return "formAddSpecie.html";
 	}
+	@GetMapping("/elencoSpecie")
+	public String elencoSpecie(Model model) {
+		model.addAttribute("elencoSpecie",this.specieRepository.findAll());
+		return "elencoSpecie.html";
+	}
+
 }
