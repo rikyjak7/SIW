@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,25 +27,33 @@ public class PersonaleController{
 	}
 	
 	@GetMapping("/staff")
-	public String staff(Model model) {
-		return "staff.html";
-	}
-	
-	@GetMapping("/personale")
 	public String showDipendenti(Model model) {
-		model.addAttribute("personale", this.personaleRepository.findAll());
+		List<Personale> dipendenti=(List<Personale>) this.personaleRepository.findAll();
+		model.addAttribute("dipendenti", dipendenti);
 		return "staff.html";
 	}
 	
 	@GetMapping("/personale/{id}")
 	public String getDipendente(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("personale", this.personaleRepository.findById(id).get());
+		model.addAttribute("dipendente", this.personaleRepository.findById(id).get());
 		return "dipendente.html";
 	}
 	
 	@GetMapping("/formAddDipendente")
 	public String formAddDipendente(Model model) {
-		model.addAttribute("personale", new Personale());
+		model.addAttribute("dipendente", new Personale());
 		return "formAddDipendente.html";
+	}
+	
+	@PostMapping("/staff")
+	public String newDipendente(@ModelAttribute("dipendente") Personale personale, Model model) {
+		if (!personaleRepository.existsByNameAndSurname(personale.getName(), personale.getSurname())) {
+			this.personaleRepository.save(personale); 
+			model.addAttribute("dipendente", personale);
+			return "dipendente.html";
+		} else {
+			model.addAttribute("messaggioErrore", "Questo dipendente esiste già");
+			return "formAddDipendente.html"; 
+		}
 	}
 }

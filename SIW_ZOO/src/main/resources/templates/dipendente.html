@@ -6,12 +6,12 @@
 </head>
 <body>
 <header th:replace="header.html::intestazione">header</header>	
-<div th:if="${personale}">
-    <h2 th:text="${personale.name} + ' ' + ${personale.surname} + ' età: ' + ${personale.age}
-    + ' stipendio: ' + ${personale.stipendio}">
+<div th:if="${dipendente}">
+    <h2 th:text="${dipendente.name} + ' ' + ${dipendente.surname} + ' età: ' + ${dipendente.age}
+    + ' stipendio: ' + ${dipendente.stipendio}">
 		 Nome dipendente Cognome dipendente Eta stipendio</h2>
-        <span><img width="30%" th:src=${personale.Image} /></span>
+        <span><img width="30%" th:src=${dipendente.Image} /></span>
     </div>
-    <div th:unless="${personale}">Non esiste</div>
+    <div th:unless="${dipendente}">Non esiste</div>
 </body>	
 </html>

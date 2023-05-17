@@ -5,24 +5,24 @@
   </head>
   <body>
     <h1>Aggiungi un nuovo dipendente</h1>
-    <form th:action="@{'/personale'}" method="POST" th:object="${personale}">
+    <form th:action="@{'/staff'}" method="POST" th:object="${dipendente}">
       <div>
         <span th:text="${messaggioErrore}">Errore</span>
       </div>
       <div>
-       <h2> Nome: <span ><input required type="text" th:field="${personale.name}"/> </h2></span>
+       <h2> Nome: <span ><input required type="text" th:field="${dipendente.name}"/> </h2></span>
       </div>
       <div>
-       <h2> Cognome: <span ><input required type="text" th:field="${personale.surname}"/></h2></span>
+       <h2> Cognome: <span ><input required type="text" th:field="${dipendente.surname}"/></h2></span>
       </div>
 	    <div>
-       <h2> Eta: <span><input type="text" th:field="${personale.age}" /></span></h2>
+       <h2> Eta: <span><input type="text" th:field="${dipendente.age}" /></span></h2>
       </div>
       <div>
-       <h2> Foto: <span><input type="text" th:field="${personale.Image}" /></span></h2>
+       <h2> Foto: <span><input type="text" th:field="${dipendente.Image}" /></span></h2>
       </div>
       <div>
-       <h2> Stipendio: <span><input type="text" th:field="${personale.stipendio}" /></span></h2>
+       <h2> Stipendio: <span><input type="text" th:field="${dipendente.stipendio}" /></span></h2>
       </div>
       <div>
         <span><button type="submit">Conferma</button></span>
