@@ -4,6 +4,7 @@
 <head>
 
 </head>
+<div class="titolo"><a href="/">Siw Zoo </a> </div>
 <body class="staff">
 <header th:replace="header.html::intestazione">header</header>
 <div class="container">
@@ -13,7 +14,7 @@
 	  <div th:unless="${dipendenti.isEmpty()}"> 
     <div class="employee-box" th:each="personale : ${dipendenti}">
 		<a th:href="@{'/personale' + '/' + ${personale.id}}">
-			<h3 th:text="${personale.name} + ' ' + ${personale.surname} ">Dipendente </h3>
+			<h5 th:text="${personale.name} + ' ' + ${personale.surname} ">Dipendente </h5>
 		</a> </div></div>
     <div class="button"> 
 	  <a th:href="@{/formAddDipendente}">aggiungi dipendente</a>

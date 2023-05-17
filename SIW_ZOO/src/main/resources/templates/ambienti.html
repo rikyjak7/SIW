@@ -4,6 +4,7 @@
 <head>
 
 </head>
+<div class="titolo"><a href="/">Siw Zoo </a> </div>
 <body class="ambienti">
 <header th:replace="header.html::intestazione">header</header>
 
@@ -15,7 +16,7 @@
 	</ul>
 </div>
 <div class="button"> 
-	<a href="/formAddAmbiente">aggiungi ambiente</a>
+	<a th:href="@{/formAddAmbiente}">aggiungi ambiente</a>
 </div>
 </body>
 </html>

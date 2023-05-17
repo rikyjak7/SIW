@@ -5,13 +5,13 @@ a{
 }
 container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .box {
   background-color: rgb(255, 128, 128);
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 400px;
   border: 1px solid black;
   text-align: center;
   line-height: 200px;
@@ -52,7 +52,8 @@ body.ambienti div.box{
   position: absolute;
   bottom:50px;
 }
-.staff .container {
+
+.staff, .container {
   display: flex;
 }
 
@@ -78,4 +79,13 @@ body.ambienti div.box{
   border: 1px solid black;
   margin-bottom: 10px;
   background-color: lightgray;
+}
+
+div.titolo {
+  background-color: rgb(0, 255, 0);
+  border: 2px solid black;
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

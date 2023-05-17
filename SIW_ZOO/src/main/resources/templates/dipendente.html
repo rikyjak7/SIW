@@ -5,6 +5,7 @@
 
 </head>
 <body>
+<div class="titolo"><a href="/">Siw Zoo </a> </div>
 <header th:replace="header.html::intestazione">header</header>	
 <div th:if="${dipendente}">
     <h2 th:text="${dipendente.name} + ' ' + ${dipendente.surname} + ' età: ' + ${dipendente.age}

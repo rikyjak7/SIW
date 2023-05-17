@@ -5,7 +5,7 @@
 	</head>
 	<body>
 		<div class="main">
-		<div class="titolo"> Siw Zoo </div>
+		<div class="titolo"><a href="/"> Siw Zoo </a></div>
 
 		<div class="sottotitolo" > <h1 th:text="${ambiente.nome}">Nome ambiente</h1></div>
 
@@ -17,7 +17,7 @@
 			<a class="col" href="#"><div> Specie 3</div></a>
 		</div>
 
-        <a class="button" href="/formAddSpecie"><div> Inserisci nuova specie</div></a>
+        <a class="button" th:href="@{/formAddSpecie}"><div> Inserisci nuova specie</div></a>
 
 	    </div>
 	</body>

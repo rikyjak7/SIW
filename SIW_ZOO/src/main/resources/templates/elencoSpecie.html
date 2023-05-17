@@ -6,18 +6,19 @@
 
     <body>
         <div class="main">
-            <div class="titolo"> Siw Zoo </div>        
+            <div class="titolo"><a href="/"> Siw Zoo </a></div>        
         <div th:if="${elencoSpecie.isEmpty()}">
 		<h2>Non ci sono specie nel sistema</h2>
 		</div>
     <ul>
 		  <div id="flex-container">
 			  <div class="specie" th:each="specie : ${elencoSpecie}">
-                <a class="card" th:href="@{'/elencoSpecie' + '/' + ${specie.id}}" th:text="${specie.nome}"></a>
+                <a class="card" th:href="@{'/specie' + '/' + ${specie.id}}" 
+                th:text="${specie.nome}"></a>
             </div>
             </div>
       </div>
     </ul>
-    <a class="button" href="/formAddSpecie"><div> Inserisci nuovo animale</a>
+    <div><a class="button" th:href="@{/formAddSpecie}"> Inserisci nuova specie</a></div>
     </body>
 </html>

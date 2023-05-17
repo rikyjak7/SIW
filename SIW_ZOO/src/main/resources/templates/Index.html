@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="/stile.css?version=3" />
+<link rel="stylesheet" href="/css.css?version=3" />
 <head>
 
 </head>
-<body>
+<div class="main">
+<div class="titolo"><a href="/">Siw Zoo </a> </div>
 <header th:replace="header.html::intestazione">header</header>
-<div class="container">
-	<div class="section">
-		<div class="box">
-			<a th:href="@{/elencoSpecie}">SPECIE</a>
-		</div>
+<div id="flex-container">
+	<div class="col">
+		<a th:href="@{/elencoSpecie}">SPECIE</a>
 	</div>
-	<div class="section">
-		<div class="box">
-			<a th:href="@{/staff}">STAFF</a>
-		</div>
+	<div class="col">
+		<a th:href="@{/staff}">STAFF</a>
 	</div>
-	<div class="section">
-		<div class="box">
-			<a th:href="@{/ambienti}">AMBIENTI</a>
-		</div>
+	<div class="col">
+		<a th:href="@{/ambienti}">AMBIENTI</a>
 	</div>
-	
+</div>
 </div>
 </body>
 </html>
