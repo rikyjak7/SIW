@@ -10,14 +10,19 @@
 		<div class="sottotitolo" > <h1 th:text="${ambiente.nome}">Nome ambiente</h1></div>
 
 		<div class="descrizione"><h1 th:text="${ambiente.descrizione}">Descrizione ambiente </h1> </div> 
-
+		
+		<div th:if="${elencoSpecie.isEmpty()}">Ambiente vuoto</div>
 		<div id="flex-container">
-			<a class="col" href="#"><div> Specie 1</div></a>
-			<a class="col" href="#"><div> Specie 2</div></a>
-			<a class="col" href="#"><div> Specie 3</div></a>
+			
+			<div class="col" th:each="specie: ${elencoSpecie}">
+				<a th:href="@{'/specie' + '/' + ${specie.id}}">
+					<h1 th:text="${specie.nome}" >Specie </h1>
+				</a>
+		 </div>
+	  </div>
 		</div>
 
-        <a class="button" th:href="@{/formAddSpecie}"><div> Inserisci nuova specie</div></a>
+        <a class="button" th:href="@{'/formAddSpecie/' + ${ambiente.id}}"><div> Inserisci nuova specie</div></a>
 
 	    </div>
 	</body>

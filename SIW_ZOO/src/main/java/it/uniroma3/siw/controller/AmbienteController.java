@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import java.util.LinkedList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.repository.*;
 import it.uniroma3.siw.model.Ambiente;
+import it.uniroma3.siw.model.Specie;
 import jakarta.validation.Valid;
 
 
@@ -25,17 +28,18 @@ public class AmbienteController{
 		model.addAttribute("ambienti",this.ambienteRepository.findAll());
 		return "ambienti.html";
 	}
-	
 	@PostMapping("/ambienti")
 	public String addAmbiente( @ModelAttribute("ambiente") Ambiente ambiente,Model model){
 		this.ambienteRepository.save(ambiente);
-		model.addAttribute("ambiente", ambiente);    
+		model.addAttribute("ambiente", ambiente);
+		model.addAttribute("elencoSpecie", new LinkedList<Specie>());
 		return "ambiente.html";
 	}   
 	
 	@GetMapping("/ambienti/{id}")
 	public String ambiente(@PathVariable("id") Long id,Model model) {
 		model.addAttribute("ambiente",this.ambienteRepository.findById(id).get());
+		model.addAttribute("elencoSpecie",this.ambienteRepository.findById(id).get().getSpecieOspitate());
 		return "ambiente.html";
 	}
 	

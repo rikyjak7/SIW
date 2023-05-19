@@ -6,7 +6,7 @@
   <body>
 	<div class="titolo"><a href="/">Siw Zoo </a> </div>
     <h1>Aggiungi una nuova specie a questo ambiente</h1>
-    <form th:action="@{'/specie'}" method="POST" th:object="${specie}">
+    <form th:action="@{'/ambienti/'+ ${ambiente.id}}" method="POST" th:object="${specie}">
       <div>
         <span th:text="${messaggioErrore}">Errore</span>
       </div>

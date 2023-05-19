@@ -19,15 +19,24 @@ import jakarta.validation.Valid;
 @Controller
 public class SpecieController{
 	
-	@Autowired SpecieRepository specieRepository;	
+	@Autowired SpecieRepository specieRepository;
+	@Autowired AmbienteRepository ambienteRepository;
 	
-	@PostMapping("/ambiente")
+	@PostMapping("/specie")
 	public String addSpecie( @ModelAttribute("specie") Specie specie,Model model){
 		this.specieRepository.save(specie);
 		model.addAttribute("specie", specie);
 		return "specie.html";
 	}   
-	
+
+	@PostMapping("/ambienti/{id}")
+	public String addSpecieAmbiente( @ModelAttribute("specie") Specie specie,Model model, @PathVariable("id") Long id){
+		Ambiente ambiente = this.ambienteRepository.findById(id).get();
+		specie.setAmbienteOspitante(ambiente);
+		this.specieRepository.save(specie);
+		model.addAttribute("specie", specie);
+		return "specie.html";
+	}   
 	@GetMapping("/specie/{id}")
 	public String ambiente(@PathVariable("id") Long id,Model model) {
 		model.addAttribute("specie",this.specieRepository.findById(id).get());
@@ -35,10 +44,21 @@ public class SpecieController{
 	}
 	
 	@GetMapping("/formAddSpecie")
-	public String formNewMovie(Model model) {
+	public String formAddAmbiente(Model model) {
 		model.addAttribute("specie", new Specie());
 		return "formAddSpecie.html";
 	}
+	@GetMapping("/formAddSpecie/{idAmbiente}")	//da modificare per far scegliere all utente specie gia esistenti.
+	public String formAddSpecieAmbiente(@PathVariable("idAmbiente") Long id,Model model) {
+		Ambiente ambiente= this.ambienteRepository.findById(id).get();
+		Specie specie= new Specie();
+		model.addAttribute("specie", specie);
+		model.addAttribute("ambiente", ambiente);
+		ambiente.getSpecieOspitate().add(specie);
+		this.ambienteRepository.save(ambiente);
+		return "formAddSpecieAmbiente.html";
+	}
+	
 	@GetMapping("/elencoSpecie")
 	public String elencoSpecie(Model model) {
 		model.addAttribute("elencoSpecie",this.specieRepository.findAll());
