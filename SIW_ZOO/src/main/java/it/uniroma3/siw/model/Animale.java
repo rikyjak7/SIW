@@ -14,9 +14,9 @@ public class Animale {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String name;
-	private String Image;
-	private Integer age;
+	private String nome;
+	private String foto;
+	private Integer eta;
 	private String descrizione;
 	private String pesoInKg;
 	
@@ -48,28 +48,28 @@ public class Animale {
 		this.id = id;
 	}
 	
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
-	public String getImage() {
-		return Image;
+	public String getFoto() {
+		return foto;
 	}
 	
-	public void setImage(String image) {
-		Image = image;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 	
-	public Integer getAge() {
-		return age;
+	public Integer getEta() {
+		return eta;
 	}
 	
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setEta(Integer eta) {
+		this.eta = eta;
 	}
 
 	public String getDescrizione() {

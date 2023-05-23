@@ -40,6 +40,7 @@ public class SpecieController{
 	@GetMapping("/specie/{id}")
 	public String ambiente(@PathVariable("id") Long id,Model model) {
 		model.addAttribute("specie",this.specieRepository.findById(id).get());
+		model.addAttribute("animali",this.specieRepository.findById(id).get().getAnimali());
 		return "specie.html";
 	}
 	

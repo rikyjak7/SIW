@@ -138,3 +138,7 @@ div.descrizione {
   margin: 0;
   padding: 0;
 }
+
+.staff, .container {
+  display: flex;
+}
