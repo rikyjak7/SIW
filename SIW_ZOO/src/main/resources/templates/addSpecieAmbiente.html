@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/css.css" />
+  </head>
+  <body>
+	<div class="titolo"><a href="/">Siw Zoo </a> </div>
+    <h1>Aggiungi una nuova specie a questo ambiente</h1>
+    <div th:if="${elencoSpecie.isEmpty()}">Non ci sono specie nel sistema</div>
+    <div id="flex-container">
+			
+			<div class="col" th:each="specie: ${elencoSpecie}">
+				<a th:href="@{'/operazioneAddSpecie' + '/' + ${specie.id} + '/' + ${ambiente.id}}">
+					<h1 th:text="${specie.nome}" >Specie </h1>
+				</a>
+		 </div>  
+    </form>
+  </body>
+</html>
