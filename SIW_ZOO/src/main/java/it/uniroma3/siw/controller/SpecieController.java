@@ -29,8 +29,8 @@ public class SpecieController{
 		return "specie.html";
 	}   
 
-	@GetMapping("/addSpecie/{idSpecie}/{idAmbiente}")
-	public String addSpecieAmbiente( @PathVariable("idSpecie") Long idSpecie,@PathVariable("idAmbiente") Long idAmbiente,Model model ){
+	@GetMapping("/operazioneAddSpecie/{idSpecie}/{idAmbiente}")
+	public String operazioneAddSpecieAmbiente( @PathVariable("idSpecie") Long idSpecie,@PathVariable("idAmbiente") Long idAmbiente,Model model ){
 		Ambiente ambiente = this.ambienteRepository.findById(idAmbiente).get();
 		Specie specie= this.specieRepository.findById(idSpecie).get();
 		specie.setAmbienteOspitante(ambiente);
@@ -38,7 +38,7 @@ public class SpecieController{
 		this.specieRepository.save(specie);
 		this.ambienteRepository.save(ambiente);
 		model.addAttribute("specie", specie);
-		return "specie.html";
+		return "Index.html";
 	}   
 	@GetMapping("/specie/{id}")
 	public String ambiente(@PathVariable("id") Long id,Model model) {
@@ -52,10 +52,10 @@ public class SpecieController{
 		model.addAttribute("specie", new Specie());
 		return "formAddSpecie.html";
 	}
-	@GetMapping("/addSpecie/{idAmbiente}")	//da modificare per far scegliere all utente specie gia esistenti.
+	@GetMapping("/addSpecie/{idAmbiente}")
 	public String formAddSpecieAmbiente(@PathVariable("idAmbiente") Long id,Model model) {
 		model.addAttribute("elencoSpecie",this.specieRepository.findAll());
-		model.addAttribute("ambiente",this.ambienteRepository.findById(id));
+		model.addAttribute("ambiente",this.ambienteRepository.findById(id).get());
 		return "addSpecieAmbiente.html";
 	}
 	
@@ -64,5 +64,4 @@ public class SpecieController{
 		model.addAttribute("elencoSpecie",this.specieRepository.findAll());
 		return "elencoSpecie.html";
 	}
-
 }
