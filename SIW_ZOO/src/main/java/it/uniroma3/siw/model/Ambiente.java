@@ -9,6 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Ambiente{
@@ -16,9 +19,17 @@ public class Ambiente{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@NotBlank
 	private String nome;
+	
 	private String image;
+	
+	@NotNull
+	@Min(100)
 	private Integer superficie;
+	
+	@NotBlank
 	private String descrizione;
 	
 	@OneToOne

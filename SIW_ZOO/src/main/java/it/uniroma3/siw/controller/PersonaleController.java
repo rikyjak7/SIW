@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.model.Personale;
 import it.uniroma3.siw.model.Specie;
 import it.uniroma3.siw.repository.PersonaleRepository;
+import it.uniroma3.siw.validator.PersonaleValidator;
+import jakarta.validation.Valid;
 
 
 @Controller
 public class PersonaleController{
 	
 	@Autowired PersonaleRepository personaleRepository;
+	@Autowired PersonaleValidator personaleValidator;
 	
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -46,14 +50,14 @@ public class PersonaleController{
 	}
 	
 	@PostMapping("/staff")
-	public String newDipendente(@ModelAttribute("dipendente") Personale personale, Model model) {
-		if (!personaleRepository.existsByNameAndSurname(personale.getName(), personale.getSurname())) {
+	public String newDipendente(@Valid @ModelAttribute("dipendente") Personale personale, BindingResult bindingResult, Model model) {
+		this.personaleValidator.validate(personale, bindingResult);
+		if (!bindingResult.hasErrors()) {
 			this.personaleRepository.save(personale); 
 			model.addAttribute("dipendente", personale);
 			return "dipendente.html";
 		} else {
-			model.addAttribute("messaggioErrore", "Questo dipendente esiste già");
-			return "formAddDipendente.html"; 
+			return "formAddDipendente.html";
 		}
 	}
 }

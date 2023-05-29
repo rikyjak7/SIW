@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.repository.*;
+import it.uniroma3.siw.validator.AmbienteValidator;
 import it.uniroma3.siw.model.Ambiente;
 import it.uniroma3.siw.model.Specie;
 import jakarta.validation.Valid;
@@ -22,18 +23,25 @@ import jakarta.validation.Valid;
 public class AmbienteController{
 	
 	@Autowired AmbienteRepository ambienteRepository;	
+	@Autowired AmbienteValidator ambienteValidator;
 	
 	@GetMapping("/ambienti")
 	public String login(Model model) {
 		model.addAttribute("ambienti",this.ambienteRepository.findAll());
 		return "ambienti.html";
 	}
+	
 	@PostMapping("/ambienti")
-	public String addAmbiente( @ModelAttribute("ambiente") Ambiente ambiente,Model model){
-		this.ambienteRepository.save(ambiente);
-		model.addAttribute("ambiente", ambiente);
-		model.addAttribute("elencoSpecie", new LinkedList<Specie>());
-		return "ambiente.html";
+	public String addAmbiente( @Valid @ModelAttribute("ambiente") Ambiente ambiente,BindingResult bindingResult, Model model){
+		this.ambienteValidator.validate(ambiente, bindingResult);
+		if(!bindingResult.hasErrors()) {
+			this.ambienteRepository.save(ambiente);
+		    model.addAttribute("ambiente", ambiente);
+		    model.addAttribute("elencoSpecie", new LinkedList<Specie>());
+		    return "ambiente.html";
+		} else {
+			return "formAddAmbiente.html";
+		}
 	}   
 	
 	@GetMapping("/ambienti/{id}")

@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Specie {
@@ -16,8 +17,14 @@ public class Specie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@NotBlank
 	private String nome;
+	
+	@NotBlank
 	private String descrizione;
+	
+	@NotBlank
 	private String provenienza;
 	
 	@ManyToOne

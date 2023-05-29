@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.repository.*;
+import it.uniroma3.siw.validator.SpecieValidator;
 import it.uniroma3.siw.model.Ambiente;
 import it.uniroma3.siw.model.Specie;
 import jakarta.validation.Valid;
@@ -21,12 +22,19 @@ public class SpecieController{
 	
 	@Autowired SpecieRepository specieRepository;
 	@Autowired AmbienteRepository ambienteRepository;
+	@Autowired SpecieValidator specieValidator;
 	
 	@PostMapping("/specie")
-	public String addSpecie( @ModelAttribute("specie") Specie specie,Model model){
-		this.specieRepository.save(specie);
-		model.addAttribute("specie", specie);
-		return "specie.html";
+	public String addSpecie(@Valid @ModelAttribute("specie") Specie specie,BindingResult bindingResult, Model model){
+		this.specieValidator.validate(specie, bindingResult);
+		if(!bindingResult.hasErrors()) {
+			this.specieRepository.save(specie);
+		    model.addAttribute("specie", specie);
+		    return "specie.html";
+		} else {
+			return "formAddSpecie.html";
+		}
+		
 	}   
 
 	@GetMapping("/operazioneAddSpecie/{idSpecie}/{idAmbiente}")

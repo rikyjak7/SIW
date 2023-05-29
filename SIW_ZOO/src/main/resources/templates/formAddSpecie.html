@@ -7,17 +7,20 @@
 	<div class="titolo"><a href="/">Siw Zoo </a> </div>
     <h1>Aggiungi una nuova specie a questo ambiente</h1>
     <form th:action="@{'/specie'}" method="POST" th:object="${specie}">
+      <div th:if="${#fields.hasGlobalErrors()}">
+        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+      </div>  
       <div>
-        <span th:text="${messaggioErrore}">Errore</span>
+       <h2> Nome: <span ><input type="text" th:field="${specie.nome}"/> </span>
+       <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Errore</span></h2>
       </div>
       <div>
-       <h2> Nome: <span ><input required type="text" th:field="${specie.nome}"/> </h2></span>
-      </div>
-      <div>
-       <h2> Provenienza: <span ><input required type="text" th:field="${specie.provenienza}"/></h2></span>
+       <h2> Provenienza: <span ><input type="text" th:field="${specie.provenienza}"/></span>
+       <span th:if="${#fields.hasErrors('provenienza')}" th:errors="*{provenienza}">Errore</span></h2>
       </div>
 	  <div>
-       <h2>descrizione: <span><input type="text" th:field="${specie.descrizione}" /></span></h2>
+       <h2>descrizione: <span><input type="text" th:field="${specie.descrizione}" /></span>
+       <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}">Errore</span></h2>
       </div>
       <div>
         <span><button type="submit">Conferma</button></span>
