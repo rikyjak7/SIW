@@ -1,11 +1,14 @@
 <html>
     <head>
 		<title>SIW Zoo</title>
-		<link rel="stylesheet" href="css.css"/>
+		<link rel="stylesheet" href="/css.css"/>
 	</head>
 	<body>
 		<div class="main">
-		<div class="titolo"><a href="/"> Siw Zoo </a></div>
+		<div class="intestazione">
+<header th:replace="header.html::intestazione">header</header>
+</div>
+
             <div class="data-container">
                 <div class="left-box">
                     <img src="path/to/image.jpg" alt="Image">
@@ -14,23 +17,23 @@
                 <div class="right-box">
                     <div class="info-box">
                         <h2>Nome:</h2>
-                        <p>nome</p>
+                        <p th:text="${animale.nome}">nome</p>
                     </div>
                     <div class="info-box">
-                        <h2>Tipo animale:</h2>
-                        <p>animale</p>
+                        <h2>Peso animale:</h2>
+                        <p th:text="${animale.pesoInKg}">animale</p>
                     </div>
                     <div class="info-box">
                         <h2>Specie:</h2>
-                        <p>specie</p>
+                        <p th:text="${animale.animal_specie}">specie</p>
                     </div>
                     <div class="info-box">
                         <h2>Età:</h2>
-                        <p>eta</p>
+                        <p th:text="${animale.eta}">eta</p>
                     </div>
                     <div class="info-box">
                         <h2>Descrizione:</h2>
-                        <p>descrizione</p>
+                        <p th:text="${animale.descrizione}">descrizione</p>
                     </div>
                 </div>
             </div>

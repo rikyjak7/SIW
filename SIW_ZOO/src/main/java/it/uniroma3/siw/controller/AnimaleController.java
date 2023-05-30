@@ -49,5 +49,4 @@ public class AnimaleController {
 		model.addAttribute("animale", animale);
 		return "animale.html";
 	}   
-	
 }

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="/stile.css" />
+    <link rel="stylesheet" href="/css.css" />
   </head>
   <body>
-	<div class="titolo"><a href="/">Siw Zoo </a> </div>
-    <h1>Aggiungi una nuova specie a questo ambiente</h1>
+	<div class="intestazione">
+<header th:replace="header.html::intestazione">header</header>
+</div>
+
+    <h1>Aggiungi una nuova specie</h1>
     <form th:action="@{'/specie'}" method="POST" th:object="${specie}">
       <div th:if="${#fields.hasGlobalErrors()}">
         <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 

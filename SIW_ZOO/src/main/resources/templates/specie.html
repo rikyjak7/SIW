@@ -1,6 +1,9 @@
 <html>
     <head>
-		<title>SIW Zoo</title>
+		<div class="intestazione">
+<header th:replace="header.html::intestazione">header</header>
+</div>
+
 		<link rel="stylesheet" href="/css.css">
 	</head>
 	<body>
@@ -14,8 +17,8 @@
 		<div th:if="${animali==null or animali.isEmpty()}">Non ci sono animali nel sistema</div>
 	  <div th:unless="${animali==null or animali.isEmpty()}"> 
 		  
-		<div th:each="animale: animali" id="flex-container">
-			<a class="col" th:href="@{'/animale/'+${animale.id}}"><div> Animale 1</div></a>
+		<div th:each="animale: ${animali}" id="flex-container">
+			<a class="col" th:text="${animale.nome}" th:href="@{'/animali/'+${animale.id}}"><div> Animale 1</div></a>
 		</div>
 	    </div>
 	    <a class="button" th:href="@{'/formAddAnimale/' + ${specie.id}}"><div> Inserisci nuovo animale </div></a>

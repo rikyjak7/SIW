@@ -5,7 +5,10 @@
 	</head>
 	<body>
 		<div class="main">
-		<div class="titolo"><a href="/"> Siw Zoo </a></div>
+		<div class="intestazione">
+<header th:replace="header.html::intestazione">header</header>
+</div>
+
 
 		<div class="sottotitolo" > <h1 th:text="${ambiente.nome}">Nome ambiente</h1></div>
 

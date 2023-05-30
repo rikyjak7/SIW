@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="/stile.css" />
+    <link rel="stylesheet" href="/css.css" />
   </head>
   <body>
-	<div class="titolo"><a href="/">Siw Zoo </a> </div>
+<div class="intestazione">
+<header th:replace="header.html::intestazione">header</header>
+</div>
+
     <h1>Aggiungi una nuova ambiente</h1>
     <form th:action="@{/ambienti}" method="POST" th:object="${ambiente}">
 		
