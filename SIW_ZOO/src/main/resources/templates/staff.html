@@ -23,9 +23,16 @@
   </div>
   <div class="right-section">
       <h1>RESPONSABILI</h1>
-    <div class="manager-box">Responsabile 1</div>
-    <div class="manager-box">Responsabile 2</div>
-    <div class="manager-box">Responsabile 3</div>
+      <div th:if="${responsabili.isEmpty()}">Non sono ancora stati assegnati dei responsabili 
+                                             per gli ambienti</div>
+      <div th:unless="${responsabili.isEmpty()}">
+      <div class="manager-box" th:each="personale : ${responsabili}">
+		<a th:href="@{'/personale' + '/' + ${personale.id}">
+			<h5 th:text="${personale.name} + ' ' + ${personale.surname}">Responsabile </h5>
+		</a></div></div>
+    <div class="button"> 
+	  <a th:href="@{/formAddResponsabile}">aggiungi responsabile di un ambiente</a>
+    </div>
   </div>
 </div>
 </body>
