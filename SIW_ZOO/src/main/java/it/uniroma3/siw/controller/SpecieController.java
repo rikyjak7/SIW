@@ -61,7 +61,7 @@ public class SpecieController{
 		return "formAddSpecie.html";
 	}
 	@GetMapping("/addSpecie/{idAmbiente}")
-	public String formAddSpecieAmbiente(@PathVariable("idAmbiente") Long id,Model model) {
+	public String AddSpecieAmbiente(@PathVariable("idAmbiente") Long id,Model model) {
 		model.addAttribute("elencoSpecie",this.specieRepository.findAll());
 		model.addAttribute("ambiente",this.ambienteRepository.findById(id).get());
 		return "addSpecieAmbiente.html";

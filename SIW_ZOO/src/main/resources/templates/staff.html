@@ -27,12 +27,9 @@
                                              per gli ambienti</div>
       <div th:unless="${responsabili.isEmpty()}">
       <div class="manager-box" th:each="personale : ${responsabili}">
-		<a th:href="@{'/personale' + '/' + ${personale.id}">
+		<a th:href="@{'/personale' + '/' + ${personale.id}}">
 			<h5 th:text="${personale.name} + ' ' + ${personale.surname}">Responsabile </h5>
 		</a></div></div>
-    <div class="button"> 
-	  <a th:href="@{/formAddResponsabile}">aggiungi responsabile di un ambiente</a>
-    </div>
   </div>
 </div>
 </body>

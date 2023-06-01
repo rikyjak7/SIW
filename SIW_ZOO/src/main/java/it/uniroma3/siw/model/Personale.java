@@ -19,7 +19,9 @@ public class Personale {
 	
 	@NotBlank
     private String name;
-	
+
+
+
 	@NotBlank
     private String surname;
 	
@@ -94,5 +96,13 @@ public class Personale {
 	
 	public void setStipendio(Float stipendio) {
 		this.stipendio = stipendio;
+	}
+	private Boolean isResponsabile;
+	
+	public Boolean getIsResponsabile() {
+		return isResponsabile;
+	}
+	public void setIsResponsabile(Boolean isResponsabile) {
+		this.isResponsabile = isResponsabile;
 	}
 }

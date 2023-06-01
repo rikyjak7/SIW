@@ -16,5 +16,8 @@
         <span><img width="30%" th:src=${dipendente.Image} /></span>
     </div>
     <div th:unless="${dipendente}">Non esiste</div>
+    <div class="button"> 
+	  <a th:href="@{'/setAmbienteResponsabile/'+${dipendente.id}}">promuovi a responsabile di un ambiente</a>
+    </div>
 </body>	
 </html>
