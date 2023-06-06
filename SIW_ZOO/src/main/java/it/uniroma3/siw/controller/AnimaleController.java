@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Ambiente;
 import it.uniroma3.siw.model.Animale;
@@ -49,4 +50,9 @@ public class AnimaleController {
 		model.addAttribute("animale", animale);
 		return "animale.html";
 	}   
+	@PostMapping("/animali")
+	public String trovaAnimali(Model model, @RequestParam String min,@RequestParam String max) {
+		model.addAttribute("animali", this.animaleRepository.findByPesoInKgGreaterThanAndPesoInKgLessThan(min, max));
+		return "animali.html";
+	}
 }

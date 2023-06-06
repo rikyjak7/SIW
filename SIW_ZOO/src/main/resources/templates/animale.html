@@ -8,10 +8,9 @@
 		<div class="intestazione">
 <header th:replace="header.html::intestazione">header</header>
 </div>
-
             <div class="data-container">
                 <div class="left-box">
-                    <img src="path/to/image.jpg" alt="Image">
+                    <img width="100%" th:src="${animale.foto}" alt="Image">
                 </div>
 
                 <div class="right-box">
@@ -25,7 +24,7 @@
                     </div>
                     <div class="info-box">
                         <h2>Specie:</h2>
-                        <p th:text="${animale.animal_specie}">specie</p>
+                        <p th:text="${animale.animal_specie.nome}">specie</p>
                     </div>
                     <div class="info-box">
                         <h2>Età:</h2>

@@ -10,5 +10,5 @@ import it.uniroma3.siw.model.Specie;
 public interface SpecieRepository extends CrudRepository<Specie,Long>{
 	
 	public boolean existsByNomeAndProvenienza(String nome, String provenienza);
-
+	public List<Specie> findByProvenienza(String provenienza);
 }

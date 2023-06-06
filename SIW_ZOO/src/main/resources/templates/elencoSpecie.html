@@ -13,17 +13,28 @@
         <div th:if="${elencoSpecie.isEmpty()}">
 		<h2>Non ci sono specie nel sistema</h2>
 		</div>
-    <ul>
-		  <div id="container">
+		  <div class="container">
 			  <div class="card" th:each="specie : ${elencoSpecie}">
                 <a th:href="@{'/specie' + '/' + ${specie.id}}" 
                 th:text="${specie.nome}"></a>
-            </div>
+              </div>
             </div>
       </div>
-    </ul>
     <div class="button">
 		<a  th:href="@{/formAddSpecie}"> Inserisci nuova specie</a>
 	</div>
+	
+	<form th:action="@{/elencoSpecie}" method="post">
+		<h2> Filtra per provenienza: <span ><input type="text" th:value="${provenienza}" name="provenienza"></span>
+	<span><button type="submit">Conferma</button></span>
+	</form>
+	
+	<form th:action="@{/animali}" method="post">
+		<h2> Filtra per peso: 
+			<span >minimo:<input type="text"  name="min"></span>
+			<span >massimo:<input type="text"  name="max"></span>
+	<span><button type="submit">Conferma</button></span>
+	</form>
+	
     </body>
 </html>

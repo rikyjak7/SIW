@@ -11,11 +11,9 @@
 
 
 <div class="container" >
-	<ul>
 	<div class="card" th:each="ambiente : ${ambienti}">
 		<a th:href="@{'/ambienti/' + ${ambiente.id}}" th:text="${ambiente.nome}">NOME AMBIENTE</a>
 	</div>
-	</ul>
 </div>
 <div class="button"> 
 	<a th:href="@{/formAddAmbiente}">aggiungi ambiente</a>

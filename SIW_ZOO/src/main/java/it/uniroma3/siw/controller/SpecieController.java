@@ -72,4 +72,9 @@ public class SpecieController{
 		model.addAttribute("elencoSpecie",this.specieRepository.findAll());
 		return "elencoSpecie.html";
 	}
+	@PostMapping("/elencoSpecie")
+	public String trovaSpecie(Model model, @RequestParam String provenienza) {
+		model.addAttribute("elencoSpecie", this.specieRepository.findByProvenienza(provenienza));
+		return "elencoSpecie.html";
+	}
 }
