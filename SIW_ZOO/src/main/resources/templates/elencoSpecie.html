@@ -31,8 +31,8 @@
 	
 	<form th:action="@{/animali}" method="post">
 		<h2> Filtra per peso: 
-			<span >minimo:<input type="text"  name="min"></span>
-			<span >massimo:<input type="text"  name="max"></span>
+			<span >minimo:<input type="text" th:value="${pesoInKg}" name="min"></span>
+			<span >massimo:<input type="text" th:value="${pesoInKg}"  name="max"></span>
 	<span><button type="submit">Conferma</button></span>
 	</form>
 	

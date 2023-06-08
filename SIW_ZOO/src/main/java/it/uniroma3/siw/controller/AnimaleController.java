@@ -51,8 +51,8 @@ public class AnimaleController {
 		return "animale.html";
 	}   
 	@PostMapping("/animali")
-	public String trovaAnimali(Model model, @RequestParam String min,@RequestParam String max) {
-		model.addAttribute("animali", this.animaleRepository.findByPesoInKgGreaterThanAndPesoInKgLessThan(min, max));
+	public String trovaAnimali(Model model, @RequestParam int min,@RequestParam int max) {
+		model.addAttribute("animali", this.animaleRepository.findByPesoInKgGreaterThanAndPesoInKgLessThan(min,max));
 		return "animali.html";
 	}
 }

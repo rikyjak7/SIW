@@ -9,5 +9,6 @@ import it.uniroma3.siw.model.Animale;
 
 public interface AnimaleRepository extends CrudRepository<Animale, Long>  {
 
-	public List<Animale> findByPesoInKgGreaterThanAndPesoInKgLessThan(String min, String max);
+	public List<Animale> findByPesoInKgGreaterThanAndPesoInKgLessThan(int min, int max);
+
 }

@@ -18,7 +18,7 @@ public class Animale {
 	private String foto;
 	private Integer eta;
 	private String descrizione;
-	private String pesoInKg;
+	private Integer pesoInKg;
 	
 	@ManyToOne
 	private Specie animal_specie;
@@ -80,11 +80,11 @@ public class Animale {
 		this.descrizione = descrizione;
 	}
 
-	public String getPesoInKg() {
+	public Integer getPesoInKg() {
 		return pesoInKg;
 	}
 
-	public void setPesoInKg(String pesoInKg) {
+	public void setPesoInKg(Integer pesoInKg) {
 		this.pesoInKg = pesoInKg;
 	}
 
