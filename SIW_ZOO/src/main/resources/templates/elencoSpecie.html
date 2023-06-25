@@ -24,15 +24,15 @@
 		<a  th:href="@{/formAddSpecie}"> Inserisci nuova specie</a>
 	</div>
 	
-	<form th:action="@{/elencoSpecie}" method="post">
+	<form th:action="@{/elencoSpecie}" method="post">  
 		<h2> Filtra per provenienza: <span ><input type="text" th:value="${provenienza}" name="provenienza"></span>
 	<span><button type="submit">Conferma</button></span>
 	</form>
 	
-	<form th:action="@{/animali}" method="post">
+	<form th:action="@{/animali}" method="post">  
 		<h2> Filtra per peso: 
-			<span >minimo:<input type="text" th:value="${pesoInKg}" name="min"></span>
-			<span >massimo:<input type="text" th:value="${pesoInKg}"  name="max"></span>
+			<span >minimo:<input type="number" th:value="${pesoInKg}" name="min"></span>
+			<span >massimo:<input type="number" th:value="${pesoInKg}"  name="max"></span>
 	<span><button type="submit">Conferma</button></span>
 	</form>
 	

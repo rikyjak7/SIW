@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.repository.*;
+import it.uniroma3.siw.service.AmbienteService;
+import it.uniroma3.siw.service.SpecieService;
 import it.uniroma3.siw.validator.SpecieValidator;
 import it.uniroma3.siw.model.Ambiente;
 import it.uniroma3.siw.model.Specie;
@@ -20,15 +22,16 @@ import jakarta.validation.Valid;
 @Controller
 public class SpecieController{
 	
-	@Autowired SpecieRepository specieRepository;
-	@Autowired AmbienteRepository ambienteRepository;
 	@Autowired SpecieValidator specieValidator;
+	
+	@Autowired SpecieService specieService;
+	@Autowired AmbienteService ambienteService;
 	
 	@PostMapping("/specie")
 	public String addSpecie(@Valid @ModelAttribute("specie") Specie specie,BindingResult bindingResult, Model model){
 		this.specieValidator.validate(specie, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			this.specieRepository.save(specie);
+			this.specieService.saveSpecie(specie);
 		    model.addAttribute("specie", specie);
 		    return "specie.html";
 		} else {
@@ -39,19 +42,14 @@ public class SpecieController{
 
 	@GetMapping("/operazioneAddSpecie/{idSpecie}/{idAmbiente}")
 	public String operazioneAddSpecieAmbiente( @PathVariable("idSpecie") Long idSpecie,@PathVariable("idAmbiente") Long idAmbiente,Model model ){
-		Ambiente ambiente = this.ambienteRepository.findById(idAmbiente).get();
-		Specie specie= this.specieRepository.findById(idSpecie).get();
-		specie.setAmbienteOspitante(ambiente);
-		ambiente.getSpecieOspitate().add(specie);
-		this.specieRepository.save(specie);
-		this.ambienteRepository.save(ambiente);
+		Specie specie=this.specieService.addSpecieToAmbiente(idAmbiente,idSpecie);
 		model.addAttribute("specie", specie);
 		return "Index.html";
 	}   
 	@GetMapping("/specie/{id}")
 	public String ambiente(@PathVariable("id") Long id,Model model) {
-		model.addAttribute("specie",this.specieRepository.findById(id).get());
-		model.addAttribute("animali",this.specieRepository.findById(id).get().getAnimali());
+		model.addAttribute("specie",this.specieService.getSpecie(id));
+		model.addAttribute("animali",this.specieService.getAnimaliSpecie(id));
 		return "specie.html";
 	}
 	
@@ -62,19 +60,19 @@ public class SpecieController{
 	}
 	@GetMapping("/addSpecie/{idAmbiente}")
 	public String AddSpecieAmbiente(@PathVariable("idAmbiente") Long id,Model model) {
-		model.addAttribute("elencoSpecie",this.specieRepository.findAll());
-		model.addAttribute("ambiente",this.ambienteRepository.findById(id).get());
+		model.addAttribute("elencoSpecie",this.ambienteService.getSpecieAmbiente(id));
+		model.addAttribute("ambiente",this.ambienteService.getAmbiente(id));
 		return "addSpecieAmbiente.html";
 	}
 	
 	@GetMapping("/elencoSpecie")
 	public String elencoSpecie(Model model) {
-		model.addAttribute("elencoSpecie",this.specieRepository.findAll());
+		model.addAttribute("elencoSpecie",this.specieService.getAll());
 		return "elencoSpecie.html";
 	}
 	@PostMapping("/elencoSpecie")
 	public String trovaSpecie(Model model, @RequestParam String provenienza) {
-		model.addAttribute("elencoSpecie", this.specieRepository.findByProvenienza(provenienza));
+		model.addAttribute("elencoSpecie", this.specieService.findByProvenienza(provenienza));
 		return "elencoSpecie.html";
 	}
 }

@@ -28,7 +28,7 @@ public class PersonaleController{
 	@Autowired PersonaleValidator personaleValidator;
 	@Autowired AmbienteRepository ambienteRepository;
 	
-	@GetMapping("/login")
+	@GetMapping("/loginPage")
 	public String login(Model model) {
 		return "login.html";
 	}

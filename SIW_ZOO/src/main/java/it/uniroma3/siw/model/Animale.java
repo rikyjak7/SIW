@@ -23,6 +23,18 @@ public class Animale {
 	@ManyToOne
 	private Specie animal_specie;
 	
+	public Animale(String nome, String foto, Integer eta, String descrizione, Integer pesoInKg) {
+		this.nome=nome;
+		this.foto=foto;
+		this.eta=eta;
+		this.descrizione=descrizione;
+		this.pesoInKg=pesoInKg;
+	}
+
+	public Animale() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(animal_specie);

@@ -44,10 +44,11 @@ public class AnimaleController {
 	}
 	@PostMapping("/animali/{id}")
 	public String addAnimaleSpecie( @ModelAttribute("animale") Animale animale,Model model, @PathVariable("id") Long id){
+		Animale newAnimale= new Animale(animale.getNome(),animale.getFoto(),animale.getEta(),animale.getDescrizione(),animale.getPesoInKg());
 		Specie specie = this.specieRepository.findById(id).get();
-		animale.setAnimal_specie(specie);
-		this.animaleRepository.save(animale);
-		model.addAttribute("animale", animale);
+		newAnimale.setAnimal_specie(specie);
+		this.animaleRepository.save(newAnimale);
+		model.addAttribute("animale", newAnimale);
 		return "animale.html";
 	}   
 	@PostMapping("/animali")
