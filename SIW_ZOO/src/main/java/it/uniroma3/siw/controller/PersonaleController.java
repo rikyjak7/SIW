@@ -17,6 +17,8 @@ import it.uniroma3.siw.model.Personale;
 import it.uniroma3.siw.model.Specie;
 import it.uniroma3.siw.repository.AmbienteRepository;
 import it.uniroma3.siw.repository.PersonaleRepository;
+import it.uniroma3.siw.service.AmbienteService;
+import it.uniroma3.siw.service.PersonaleService;
 import it.uniroma3.siw.validator.PersonaleValidator;
 import jakarta.validation.Valid;
 
@@ -24,9 +26,10 @@ import jakarta.validation.Valid;
 @Controller
 public class PersonaleController{
 	
-	@Autowired PersonaleRepository personaleRepository;
+	
 	@Autowired PersonaleValidator personaleValidator;
-	@Autowired AmbienteRepository ambienteRepository;
+	@Autowired PersonaleService personaleService;
+	@Autowired AmbienteService ambienteService;
 	
 	@GetMapping("/loginPage")
 	public String login(Model model) {
@@ -35,8 +38,10 @@ public class PersonaleController{
 	
 	@GetMapping("/staff")
 	public String showDipendenti(Model model) {
-		List<Personale> dipendenti=(List<Personale>) this.personaleRepository.findAll();
-		List<Personale> responsabili=(List<Personale>) this.personaleRepository.findByIsResponsabile(true);
+		
+		
+		List<Personale> dipendenti=(List<Personale>) this.personaleService.getDipendenti();
+		List<Personale> responsabili=(List<Personale>) this.personaleService.getResponsabili();
 		model.addAttribute("responsabili", responsabili);
 		model.addAttribute("dipendenti", dipendenti);
 		return "staff.html";
@@ -44,7 +49,7 @@ public class PersonaleController{
 	
 	@GetMapping("/personale/{id}")
 	public String getDipendente(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("dipendente", this.personaleRepository.findById(id).get());
+		model.addAttribute("dipendente", this.personaleService.getDipendente(id));
 		return "dipendente.html";
 	}
 	
@@ -53,12 +58,16 @@ public class PersonaleController{
 		model.addAttribute("dipendente", new Personale());
 		return "formAddDipendente.html";
 	}
-	
+	@GetMapping("/modificaStipendio/{id}")
+	public String modificaStipendio(Model model, @PathVariable("id")Long id) {
+		model.addAttribute("dipendente", this.personaleService.getDipendente(id));
+		return "modificaStipendio.html";
+	}
 	@PostMapping("/staff")
 	public String newDipendente(@Valid @ModelAttribute("dipendente") Personale personale, BindingResult bindingResult, Model model) {
 		this.personaleValidator.validate(personale, bindingResult);
 		if (!bindingResult.hasErrors()) {
-			this.personaleRepository.save(personale); 
+			this.personaleService.save(personale);
 			model.addAttribute("dipendente", personale);
 			return "dipendente.html";
 		} else {
@@ -68,18 +77,20 @@ public class PersonaleController{
 	@GetMapping("/setAmbienteResponsabile/{idResponsabile}")
 	public String addResponsabile(@PathVariable("idResponsabile") Long id,Model model)
 	{	
-		model.addAttribute("dipendente",this.personaleRepository.findById(id).get());
-		model.addAttribute("ambienti",this.ambienteRepository.findAll());
+		model.addAttribute("dipendente",this.personaleService.getDipendente(id));
+		model.addAttribute("ambienti",this.ambienteService.getAmbienti());
 		return "setAmbienteResponsabile.html";
 	}
 	@GetMapping("/operazioneAddResponsabile/{idResponsabile}/{idAmbiente}")
 	public String operazioneAddResponsabileAmbiente( @PathVariable("idResponsabile") Long idResponsabile,@PathVariable("idAmbiente") Long idAmbiente,Model model ){
-		Ambiente ambiente = this.ambienteRepository.findById(idAmbiente).get();
-		Personale responsabile= this.personaleRepository.findById(idResponsabile).get();
-		ambiente.setResponsabile(responsabile);
-		responsabile.setIsResponsabile(true);
-		this.personaleRepository.save(responsabile);
-		this.ambienteRepository.save(ambiente);
-		return "Index.html";
+		this.ambienteService.saveResponsabile(idAmbiente,idResponsabile);
+				return "Index.html";
+	}
+	@PostMapping("/dipendente/{id}")
+	public String modificaStipendio( @ModelAttribute("stipendio") float stipendio,@PathVariable("id") Long id, Model model) {
+			Personale personale=this.personaleService.getDipendente(id);
+			this.personaleService.modificaStipendio(personale,stipendio);
+			model.addAttribute("dipendente", personale);
+			return "dipendente.html";
 	}
 }

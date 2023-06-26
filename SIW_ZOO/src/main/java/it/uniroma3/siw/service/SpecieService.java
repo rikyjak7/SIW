@@ -9,6 +9,7 @@ import it.uniroma3.siw.model.Ambiente;
 import it.uniroma3.siw.model.Specie;
 import it.uniroma3.siw.model.Animale;
 import it.uniroma3.siw.repository.AmbienteRepository;
+import it.uniroma3.siw.repository.AnimaleRepository;
 import it.uniroma3.siw.repository.SpecieRepository;
 import jakarta.validation.Valid;
 
@@ -17,6 +18,7 @@ import jakarta.validation.Valid;
 public class SpecieService {
 	@Autowired SpecieRepository specieRepository;
 	@Autowired AmbienteRepository ambienteRepository;
+	@Autowired AnimaleRepository animaleRepository;
 	
 	public void saveSpecie(@Valid Specie specie) {
 		this.specieRepository.save(specie);
@@ -44,6 +46,11 @@ public Iterable<Specie> getAll() {
 public Object findByProvenienza(String provenienza) {
 	return this.specieRepository.findByProvenienza(provenienza);
 }
+public void addAnimale(Animale newAnimale,Long id) {
+	Specie specie = this.specieRepository.findById(id).get();
+	newAnimale.setAnimal_specie(specie);
+	this.animaleRepository.save(newAnimale);
+	}
 
 
 }

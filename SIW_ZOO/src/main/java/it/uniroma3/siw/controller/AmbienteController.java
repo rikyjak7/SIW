@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.repository.*;
+import it.uniroma3.siw.service.AmbienteService;
 import it.uniroma3.siw.validator.AmbienteValidator;
 import it.uniroma3.siw.model.Ambiente;
 import it.uniroma3.siw.model.Specie;
@@ -22,12 +23,12 @@ import jakarta.validation.Valid;
 @Controller
 public class AmbienteController{
 	
-	@Autowired AmbienteRepository ambienteRepository;	
+	@Autowired AmbienteService ambienteService;
 	@Autowired AmbienteValidator ambienteValidator;
 	
 	@GetMapping("/ambienti")
 	public String login(Model model) {
-		model.addAttribute("ambienti",this.ambienteRepository.findAll());
+		model.addAttribute("ambienti",this.ambienteService.getAmbienti());
 		return "ambienti.html";
 	}
 	
@@ -35,7 +36,7 @@ public class AmbienteController{
 	public String addAmbiente( @Valid @ModelAttribute("ambiente") Ambiente ambiente,BindingResult bindingResult, Model model){
 		this.ambienteValidator.validate(ambiente, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			this.ambienteRepository.save(ambiente);
+			this.ambienteService.save(ambiente);
 		    model.addAttribute("ambiente", ambiente);
 		    model.addAttribute("elencoSpecie", new LinkedList<Specie>());
 		    return "ambiente.html";
@@ -46,8 +47,8 @@ public class AmbienteController{
 	
 	@GetMapping("/ambienti/{id}")
 	public String ambiente(@PathVariable("id") Long id,Model model) {
-		model.addAttribute("ambiente",this.ambienteRepository.findById(id).get());
-		model.addAttribute("elencoSpecie",this.ambienteRepository.findById(id).get().getSpecieOspitate());
+		model.addAttribute("ambiente",this.ambienteService.getAmbiente(id));
+		model.addAttribute("elencoSpecie",this.ambienteService.getSpecieAmbiente(id));
 		return "ambiente.html";
 	}
 	

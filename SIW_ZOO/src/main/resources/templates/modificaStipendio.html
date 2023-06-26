@@ -10,17 +10,16 @@
 </div>
 	
 <div th:if="${dipendente}">
-    <h2 th:text="${dipendente.name} + ' ' + ${dipendente.surname} + ' età: ' + ${dipendente.age}
-    + ' stipendio: ' + ${dipendente.stipendio}">
+	 <h2 th:text="${dipendente.name} + ' ' + ${dipendente.surname} + ' età: ' + ${dipendente.age}">
 		 Nome dipendente Cognome dipendente Eta stipendio</h2>
         <span><img width="30%" th:src=${dipendente.Image} /></span>
+        <form th:action="@{'/dipendente/' +${dipendente.id} }" method="POST" th:object="${dipendente}">
+	        <span> <input type="text" name="stipendio" th:value="${dipendente.stipendio}" > </span> 
+	        <div>
+            <span><button type="submit">Conferma</button></span>
+            </div>
+	   </form>
     </div>
     <div th:unless="${dipendente}">Non esiste</div>
-    <div class="button"> 
-	  <a th:href="@{'/setAmbienteResponsabile/'+${dipendente.id}}">promuovi a responsabile di un ambiente</a>
-    </div>
-    <div class="button"> 
-	  <a th:href="@{'/modificaStipendio/'+${dipendente.id}}">modifica lo stipendio</a>
-    </div>
 </body>	
 </html>
