@@ -33,7 +33,7 @@ public class AnimaleController {
 		return "animale.html";
 	}
 	
-	@GetMapping("/formAddAnimale/{id}")
+	@GetMapping("/dipendente/formAddAnimale/{id}")
 	public String formAddAnimale(Model model,@PathVariable("id") Long id)
 	{
 		Specie specie= this.specieService.getSpecie(id);
@@ -42,7 +42,7 @@ public class AnimaleController {
 		model.addAttribute("specie",specie);
 		specie.getAnimali().add(animale);
 		this.specieService.saveSpecie(specie);
-		return "formAddAnimale.html";
+		return "dipendente/formAddAnimale.html";
 	}
 	@PostMapping("/animali/{id}")
 	public String addAnimaleSpecie( @ModelAttribute("animale") Animale animale,Model model, @PathVariable("id") Long id){

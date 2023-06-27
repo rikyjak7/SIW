@@ -53,15 +53,15 @@ public class PersonaleController{
 		return "dipendente.html";
 	}
 	
-	@GetMapping("/formAddDipendente")
+	@GetMapping("/responsabile/formAddDipendente")
 	public String formAddDipendente(Model model) {
 		model.addAttribute("dipendente", new Personale());
-		return "formAddDipendente.html";
+		return "responsabile/formAddDipendente.html";
 	}
-	@GetMapping("/modificaStipendio/{id}")
+	@GetMapping("/responsabile/modificaStipendio/{id}")
 	public String modificaStipendio(Model model, @PathVariable("id")Long id) {
 		model.addAttribute("dipendente", this.personaleService.getDipendente(id));
-		return "modificaStipendio.html";
+		return "responsabile/modificaStipendio.html";		
 	}
 	@PostMapping("/staff")
 	public String newDipendente(@Valid @ModelAttribute("dipendente") Personale personale, BindingResult bindingResult, Model model) {
@@ -71,15 +71,15 @@ public class PersonaleController{
 			model.addAttribute("dipendente", personale);
 			return "dipendente.html";
 		} else {
-			return "formAddDipendente.html";
+			return "responsabile/formAddDipendente.html";
 		}
 	}
-	@GetMapping("/setAmbienteResponsabile/{idResponsabile}")
+	@GetMapping("responsabile/setAmbienteResponsabile/{idResponsabile}")
 	public String addResponsabile(@PathVariable("idResponsabile") Long id,Model model)
 	{	
 		model.addAttribute("dipendente",this.personaleService.getDipendente(id));
 		model.addAttribute("ambienti",this.ambienteService.getAmbienti());
-		return "setAmbienteResponsabile.html";
+		return "responsabile/setAmbienteResponsabile.html";
 	}
 	@GetMapping("/operazioneAddResponsabile/{idResponsabile}/{idAmbiente}")
 	public String operazioneAddResponsabileAmbiente( @PathVariable("idResponsabile") Long idResponsabile,@PathVariable("idAmbiente") Long idAmbiente,Model model ){

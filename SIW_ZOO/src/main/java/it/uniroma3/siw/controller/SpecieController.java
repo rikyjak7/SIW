@@ -53,16 +53,16 @@ public class SpecieController{
 		return "specie.html";
 	}
 	
-	@GetMapping("/formAddSpecie")
+	@GetMapping("/dipendente/formAddSpecie")
 	public String formAddAmbiente(Model model) {
 		model.addAttribute("specie", new Specie());
-		return "formAddSpecie.html";
+		return "dipendente/formAddSpecie.html";
 	}
-	@GetMapping("/addSpecie/{idAmbiente}")
+	@GetMapping("dipendente/addSpecie/{idAmbiente}")
 	public String AddSpecieAmbiente(@PathVariable("idAmbiente") Long id,Model model) {
-		model.addAttribute("elencoSpecie",this.ambienteService.getSpecieAmbiente(id));
+		model.addAttribute("elencoSpecie",this.specieService.getAll());
 		model.addAttribute("ambiente",this.ambienteService.getAmbiente(id));
-		return "addSpecieAmbiente.html";
+		return "dipendente/addSpecieAmbiente.html";
 	}
 	
 	@GetMapping("/elencoSpecie")

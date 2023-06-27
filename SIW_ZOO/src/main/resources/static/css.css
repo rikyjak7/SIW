@@ -1,24 +1,37 @@
 body {
-  background-color: rgb(0, 128, 0);
+      font-family: "Poppins", sans-serif;
+      font-size: 1rem;
+      color: white;
+      background-color: #ff7a7a;
+      background-image:linear-gradient(to right,#ff7a7a,rgb(128, 0, 0)) ;
+      margin:0;
 }
 
 div.intestazione{
-	display: flex;
-	align-items: center	;
-	justify-content: center;
+	background-color:rgb(255, 255, 255);
+	background-image: url("images/sfondoFoglia.jpg");
+	width: 100%;
+	top:0;
+	left: 0;
+	
+}
+
+a{
+text-decoration: none;	
+	
+}
+
+
+header .login{
+	  left: 81%;
+    position: relative;
 }
 
 div.main{
-  
-} 	
 
+} 	
 div.titolo {
-  background-color: rgb(0, 255, 0);
-  border: 2px solid black;
-  width: 95%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  float: left;
 }
 
 div.sottotitolo {
@@ -48,7 +61,7 @@ div.descrizione {
   justify-content: space-between;
   height: 200px;
   width: 100%;
-  margin-top: 2%;
+  margin-top: 10%;
 }
 
 .col {

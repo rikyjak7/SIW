@@ -52,9 +52,9 @@ public class AmbienteController{
 		return "ambiente.html";
 	}
 	
-	@GetMapping("/formAddAmbiente")
+	@GetMapping("/dipendente/formAddAmbiente")
 	public String formAddAmbiente(Model model) {
 		model.addAttribute("ambiente", new Ambiente());
-		return "formAddAmbiente.html";
+		return "dipendente/formAddAmbiente.html";
 	}
 }
