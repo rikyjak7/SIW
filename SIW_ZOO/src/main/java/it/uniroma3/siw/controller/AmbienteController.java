@@ -27,9 +27,15 @@ public class AmbienteController{
 	@Autowired AmbienteValidator ambienteValidator;
 	
 	@GetMapping("/ambienti")
-	public String login(Model model) {
+	public String ambienti(Model model) {
 		model.addAttribute("ambienti",this.ambienteService.getAmbienti());
 		return "ambienti.html";
+	}
+	
+	@GetMapping("/dipendente/ambientiDip")
+	public String ambientiResponsabile(Model model) {
+		model.addAttribute("ambienti",this.ambienteService.getAmbienti());
+		return "dipendente/ambientiDip.html";
 	}
 	
 	@PostMapping("/ambienti")
@@ -50,6 +56,13 @@ public class AmbienteController{
 		model.addAttribute("ambiente",this.ambienteService.getAmbiente(id));
 		model.addAttribute("elencoSpecie",this.ambienteService.getSpecieAmbiente(id));
 		return "ambiente.html";
+	}
+	
+	@GetMapping("/dipendente/ambientiDip/{id}")
+	public String ambienteDip(@PathVariable("id") Long id,Model model) {
+		model.addAttribute("ambiente",this.ambienteService.getAmbiente(id));
+		model.addAttribute("elencoSpecie",this.ambienteService.getSpecieAmbiente(id));
+		return "dipendente/ambienteDip.html";
 	}
 	
 	@GetMapping("/dipendente/formAddAmbiente")

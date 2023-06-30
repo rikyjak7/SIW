@@ -14,11 +14,11 @@
 </div>
 <div class="container" >
 	<div class="card" th:each="ambiente : ${ambienti}">
-		<a th:href="@{'/ambienti/' + ${ambiente.id}}" th:text="${ambiente.nome}">NOME AMBIENTE</a>
+		<a th:href="@{'/dipendente/ambientiDip/' + ${ambiente.id}}" th:text="${ambiente.nome}">NOME AMBIENTE</a>
 	</div>
 </div>
-<!--<div class="button"> 
+<div class="button"> 
 	<a th:href="@{/dipendente/formAddAmbiente}">aggiungi ambiente</a>
-</div>-->
+</div>
 </body>
 </html>

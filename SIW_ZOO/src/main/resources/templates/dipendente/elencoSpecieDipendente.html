@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>SIW Zoo</title>
-		<link rel="stylesheet" href="css.css"/>
+		<link rel="stylesheet" th:href="@{/css.css}"/>
     </head>
 
     <body>
@@ -15,16 +15,16 @@
 		</div>
 		  <div class="container">
 			  <div class="card" th:each="specie : ${elencoSpecie}">
-                <a th:href="@{'/specie' + '/' + ${specie.id}}" 
+                <a th:href="@{'/dipendente/specie' + '/' + ${specie.id}}" 
                 th:text="${specie.nome}"></a>
               </div>
             </div>
       </div>
-    <!--<div class="button">
+    <div class="button">
 		<a  th:href="@{/dipendente/formAddSpecie}"> Inserisci nuova specie</a>
-	</div>-->
+	</div>
 	
-	<form th:action="@{/elencoSpecie}" method="post">  
+	<form th:action="@{/dipendente/elencoSpecie}" method="post">  
 		<h2> Filtra per provenienza: <span ><input type="text" th:value="${provenienza}" name="provenienza"></span>
 	<span><button type="submit">Conferma</button></span>
 	</form>

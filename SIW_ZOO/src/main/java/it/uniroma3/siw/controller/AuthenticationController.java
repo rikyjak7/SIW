@@ -16,10 +16,18 @@ import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.UserService;
+import it.uniroma3.siw.validator.CredentialsValidator;
+import it.uniroma3.siw.validator.UserValidator;
 import jakarta.validation.Valid;
 
 @Controller
 public class AuthenticationController {
+	
+	@Autowired
+	private UserValidator userValidator;
+	
+	@Autowired
+	private CredentialsValidator credentialsValidator;
 	
 	@Autowired
 	private CredentialsService credentialsService;
@@ -31,7 +39,7 @@ public class AuthenticationController {
 	public String showRegisterForm (Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("credentials", new Credentials());
-		return "formRegisterUser";
+		return "formRegisterUser.html";
 	}
 	
 	@GetMapping(value = "/login") 
@@ -45,15 +53,18 @@ public class AuthenticationController {
 		if (authentication instanceof AnonymousAuthenticationToken) {
 	        return "index.html";
 		}
-		/*
+		
 		else {		
 			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+			
+			if (credentials.getRole().equals(Credentials.DEFAULT_ROLE)) {
+				return "dipendente/indexDipendente.html";
+			}
 			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-				return "admin/indexAdmin.html";
+				return "responsabile/indexResponsabile.html";
 			}
 		}
-		*/
         return "index.html";
 	}
 		
@@ -63,8 +74,11 @@ public class AuthenticationController {
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "admin/indexAdmin.html";
+            return "responsabile/indexResponsabile.html";
         }
+    	if (credentials.getRole().equals(Credentials.DEFAULT_ROLE)) {
+			return "dipendente/indexDipendente.html";
+		}
         return "index.html";
     }
 
@@ -75,14 +89,18 @@ public class AuthenticationController {
                  BindingResult credentialsBindingResult,
                  Model model) {
 
+		this.userValidator.validate(user, userBindingResult);
+		this.credentialsValidator.validate(credentials, credentialsBindingResult);
 		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
         if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
             userService.saveUser(user);
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
-            return "registrationSuccessful";
+            return "registrationSuccessful.html";
+        } else {
+        	return "formRegisterUser.html";
         }
-        return "registerUser";
+        
     }
 }

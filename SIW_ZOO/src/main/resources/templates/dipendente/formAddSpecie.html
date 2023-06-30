@@ -5,11 +5,11 @@
   </head>
   <body>
 	<div class="intestazione">
-<header th:replace="header.html::intestazione">header</header>
+<header th:replace="~{header.html::intestazione}">header</header>
 </div>
 
     <h1>Aggiungi una nuova specie</h1>
-    <form th:action="@{'/specie'}" method="POST" th:object="${specie}">
+    <form th:action="@{'/dipendente/addSpecie'}" method="POST" th:object="${specie}">
       <div th:if="${#fields.hasGlobalErrors()}">
         <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
       </div>  

@@ -5,11 +5,11 @@
   </head>
   <body>
 	<div class="intestazione">
-<header th:replace="header.html::intestazione">header</header>
+<header th:replace="~{header.html::intestazione}">header</header>
 </div>
 
     <h1>Aggiungi un nuovo dipendente</h1>
-    <form th:action="@{'/staff'}" method="POST" th:object="${dipendente}">
+    <form th:action="@{'/responsabile/staffResponsabile'}" method="POST" th:object="${dipendente}">
       <div th:if="${#fields.hasGlobalErrors()}">
         <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
         </div>  

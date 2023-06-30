@@ -47,10 +47,27 @@ public class PersonaleController{
 		return "staff.html";
 	}
 	
+	@GetMapping("/responsabile/staffResponsabile")
+	public String showDipendentiResponsabile(Model model) {
+		
+		
+		List<Personale> dipendenti=(List<Personale>) this.personaleService.getDipendenti();
+		List<Personale> responsabili=(List<Personale>) this.personaleService.getResponsabili();
+		model.addAttribute("responsabili", responsabili);
+		model.addAttribute("dipendenti", dipendenti);
+		return "responsabile/staffResponsabile.html";
+	}
+	
 	@GetMapping("/personale/{id}")
 	public String getDipendente(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("dipendente", this.personaleService.getDipendente(id));
 		return "dipendente.html";
+	}
+	
+	@GetMapping("/personaleResponsabile/{id}")
+	public String getDipendenteResponsabile(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("dipendente", this.personaleService.getDipendente(id));
+		return "responsabile/dipendenteResponsabile.html";
 	}
 	
 	@GetMapping("/responsabile/formAddDipendente")
@@ -63,7 +80,7 @@ public class PersonaleController{
 		model.addAttribute("dipendente", this.personaleService.getDipendente(id));
 		return "responsabile/modificaStipendio.html";		
 	}
-	@PostMapping("/staff")
+	@PostMapping("/responsabile/staffResponsabile")
 	public String newDipendente(@Valid @ModelAttribute("dipendente") Personale personale, BindingResult bindingResult, Model model) {
 		this.personaleValidator.validate(personale, bindingResult);
 		if (!bindingResult.hasErrors()) {
@@ -84,7 +101,7 @@ public class PersonaleController{
 	@GetMapping("/operazioneAddResponsabile/{idResponsabile}/{idAmbiente}")
 	public String operazioneAddResponsabileAmbiente( @PathVariable("idResponsabile") Long idResponsabile,@PathVariable("idAmbiente") Long idAmbiente,Model model ){
 		this.ambienteService.saveResponsabile(idAmbiente,idResponsabile);
-				return "Index.html";
+				return "indexResponsabile.html";
 	}
 	@PostMapping("/dipendente/{id}")
 	public String modificaStipendio( @ModelAttribute("stipendio") float stipendio,@PathVariable("id") Long id, Model model) {

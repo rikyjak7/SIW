@@ -27,15 +27,15 @@ public class SpecieController{
 	@Autowired SpecieService specieService;
 	@Autowired AmbienteService ambienteService;
 	
-	@PostMapping("/specie")
+	@PostMapping("/dipendente/addSpecie")
 	public String addSpecie(@Valid @ModelAttribute("specie") Specie specie,BindingResult bindingResult, Model model){
 		this.specieValidator.validate(specie, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.specieService.saveSpecie(specie);
 		    model.addAttribute("specie", specie);
-		    return "specie.html";
+		    return "dipendente/specieDipendente.html";
 		} else {
-			return "formAddSpecie.html";
+			return "dipendente/formAddSpecie.html";
 		}
 		
 	}   
@@ -45,12 +45,20 @@ public class SpecieController{
 		Specie specie=this.specieService.addSpecieToAmbiente(idAmbiente,idSpecie);
 		model.addAttribute("specie", specie);
 		return "Index.html";
-	}   
+	}  
+	
 	@GetMapping("/specie/{id}")
 	public String ambiente(@PathVariable("id") Long id,Model model) {
 		model.addAttribute("specie",this.specieService.getSpecie(id));
 		model.addAttribute("animali",this.specieService.getAnimaliSpecie(id));
 		return "specie.html";
+	}
+	
+	@GetMapping("/dipendente/specie/{id}")
+	public String ambienteDip(@PathVariable("id") Long id,Model model) {
+		model.addAttribute("specie",this.specieService.getSpecie(id));
+		model.addAttribute("animali",this.specieService.getAnimaliSpecie(id));
+		return "dipendente/specieDipendente.html";
 	}
 	
 	@GetMapping("/dipendente/formAddSpecie")
@@ -70,9 +78,22 @@ public class SpecieController{
 		model.addAttribute("elencoSpecie",this.specieService.getAll());
 		return "elencoSpecie.html";
 	}
+	
+	@GetMapping("/dipendente/elencoSpecieDipendente")
+	public String elencoSpecieDipendente(Model model) {
+		model.addAttribute("elencoSpecie",this.specieService.getAll());
+		return "dipendente/elencoSpecieDipendente.html";
+	}
+	
 	@PostMapping("/elencoSpecie")
 	public String trovaSpecie(Model model, @RequestParam String provenienza) {
 		model.addAttribute("elencoSpecie", this.specieService.findByProvenienza(provenienza));
 		return "elencoSpecie.html";
+	}
+	
+	@PostMapping("/dipendente/elencoSpecie")
+	public String trovaSpecieDip(Model model, @RequestParam String provenienza) {
+		model.addAttribute("elencoSpecie", this.specieService.findByProvenienza(provenienza));
+		return "dipendente/elencoSpecieDipendente.html";
 	}
 }

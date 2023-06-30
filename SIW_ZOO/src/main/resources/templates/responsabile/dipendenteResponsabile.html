@@ -16,11 +16,11 @@
         <span><img width="30%" th:src=${dipendente.Image} /></span>
     </div>
     <div th:unless="${dipendente}">Non esiste</div>
-    <!--<div class="button"> 
+    <div class="button"> 
 	  <a th:href="@{'/responsabile/setAmbienteResponsabile/'+${dipendente.id}}">promuovi a responsabile di un ambiente</a>
     </div>
     <div class="button"> 
 	  <a th:href="@{'/responsabile/modificaStipendio/'+${dipendente.id}}">modifica lo stipendio</a>
-    </div>-->
+    </div>
 </body>	
 </html>

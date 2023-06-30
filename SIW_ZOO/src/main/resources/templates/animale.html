@@ -6,7 +6,7 @@
 	<body>
 		<div class="main">
 		<div class="intestazione">
-<header th:replace="header.html::intestazione">header</header>
+<header th:replace="~{header.html::intestazione}">header</header>
 </div>
             <div class="data-container">
                 <div class="left-box">
@@ -20,7 +20,7 @@
                     </div>
                     <div class="info-box">
                         <h2>Peso animale:</h2>
-                        <p th:text="${animale.pesoInKg}">animale</p>
+                        <p th:text="${animale.pesoInKg}">peso</p>
                     </div>
                     <div class="info-box">
                         <h2>Specie:</h2>
