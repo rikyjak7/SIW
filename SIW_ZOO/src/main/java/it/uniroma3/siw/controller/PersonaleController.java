@@ -1,5 +1,6 @@
 package it.uniroma3.siw.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,22 +76,48 @@ public class PersonaleController{
 		model.addAttribute("dipendente", new Personale());
 		return "responsabile/formAddDipendente.html";
 	}
+	
 	@GetMapping("/responsabile/modificaStipendio/{id}")
 	public String modificaStipendio(Model model, @PathVariable("id")Long id) {
 		model.addAttribute("dipendente", this.personaleService.getDipendente(id));
 		return "responsabile/modificaStipendio.html";		
 	}
+	
 	@PostMapping("/responsabile/staffResponsabile")
 	public String newDipendente(@Valid @ModelAttribute("dipendente") Personale personale, BindingResult bindingResult, Model model) {
-		this.personaleValidator.validate(personale, bindingResult);
-		if (!bindingResult.hasErrors()) {
-			this.personaleService.save(personale);
-			model.addAttribute("dipendente", personale);
-			return "dipendente.html";
-		} else {
+		
+		try {
+			model.addAttribute("dipendente", this.personaleService.save(personale, bindingResult));
+			return "responsabile/dipendenteResponsabile.html";
+		} catch(IOException e) {
 			return "responsabile/formAddDipendente.html";
 		}
 	}
+	
+	@GetMapping("/responsabile/editDipendente/{id}")
+	public String formEditDipendente(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("dipendente", this.personaleService.getDipendente(id));
+		return "responsabile/editDipendente.html";
+	}
+	
+	@PostMapping("/responsabile/editDipendente/{dipendenteId}")
+	public String editDipendente(@Valid @ModelAttribute("dipendente") Personale newDipendente, @PathVariable ("dipendenteId") Long dipendenteId,
+			BindingResult bindingResult, Model model) {
+		try {
+			model.addAttribute("dipendente", this.personaleService.saveEdit(newDipendente, dipendenteId, bindingResult));
+			return "responsabile/dipendenteResponsabile.html";
+		} catch(IOException e) {
+			return "responsabile/editDipendente.html";
+		}
+	}
+	
+	@GetMapping("/responsabile/removeDipendente/{id}")
+	public String removeDipendente(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("responsabili", this.personaleService.removeRespAndGetAllResponsabili(id));
+		model.addAttribute("dipendenti", this.personaleService.removeDip(id));
+		return "responsabile/staffResponsabile.html";
+	}
+	
 	@GetMapping("responsabile/setAmbienteResponsabile/{idResponsabile}")
 	public String addResponsabile(@PathVariable("idResponsabile") Long id,Model model)
 	{	
@@ -98,16 +125,18 @@ public class PersonaleController{
 		model.addAttribute("ambienti",this.ambienteService.getAmbienti());
 		return "responsabile/setAmbienteResponsabile.html";
 	}
+	
 	@GetMapping("/operazioneAddResponsabile/{idResponsabile}/{idAmbiente}")
 	public String operazioneAddResponsabileAmbiente( @PathVariable("idResponsabile") Long idResponsabile,@PathVariable("idAmbiente") Long idAmbiente,Model model ){
 		this.ambienteService.saveResponsabile(idAmbiente,idResponsabile);
-				return "indexResponsabile.html";
+				return "responsabile/indexResponsabile.html";
 	}
+	
 	@PostMapping("/dipendente/{id}")
 	public String modificaStipendio( @ModelAttribute("stipendio") float stipendio,@PathVariable("id") Long id, Model model) {
 			Personale personale=this.personaleService.getDipendente(id);
 			this.personaleService.modificaStipendio(personale,stipendio);
 			model.addAttribute("dipendente", personale);
-			return "dipendente.html";
+			return "responsabile/dipendenteResponsabile.html";
 	}
 }

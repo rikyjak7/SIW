@@ -1,5 +1,6 @@
 package it.uniroma3.siw.controller;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,16 +41,32 @@ public class AmbienteController{
 	
 	@PostMapping("/ambienti")
 	public String addAmbiente( @Valid @ModelAttribute("ambiente") Ambiente ambiente,BindingResult bindingResult, Model model){
-		this.ambienteValidator.validate(ambiente, bindingResult);
-		if(!bindingResult.hasErrors()) {
-			this.ambienteService.save(ambiente);
-		    model.addAttribute("ambiente", ambiente);
+		try {
+		    model.addAttribute("ambiente", this.ambienteService.save(ambiente, bindingResult));
 		    model.addAttribute("elencoSpecie", new LinkedList<Specie>());
-		    return "ambiente.html";
-		} else {
-			return "formAddAmbiente.html";
+		    return "dipendente/ambienteDip.html";
+		} catch(IOException e) {
+			return "dipendente/formAddAmbiente.html";
 		}
 	}   
+	
+	@GetMapping("/dipendente/editAmbiente/{ambienteId}")
+	public String formEditAmbiente(@PathVariable("ambienteId") Long ambienteId, Model model) {
+		model.addAttribute("ambiente", this.ambienteService.getAmbiente(ambienteId));
+		return "dipendente/editAmbiente.html";
+	}
+	
+	@PostMapping("/dipendente/editAmbiente/{ambienteId}")
+	public String editAmbiente(@Valid @ModelAttribute("ambiente") Ambiente newAmbiente, @PathVariable("ambienteId") Long ambienteId,
+			BindingResult bindingResult, Model model) {
+		try {
+			model.addAttribute("ambiente", this.ambienteService.saveEdit(newAmbiente, ambienteId, bindingResult));
+			model.addAttribute("elencoSpecie", this.ambienteService.getSpecieAmbiente(ambienteId));
+			return "dipendente/ambienteDip.html";
+		} catch(IOException e) {
+			return "dipendente/editAmbiente.html";
+		}
+	}
 	
 	@GetMapping("/ambienti/{id}")
 	public String ambiente(@PathVariable("id") Long id,Model model) {

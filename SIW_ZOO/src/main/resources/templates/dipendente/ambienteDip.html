@@ -25,8 +25,14 @@
 	  </div>
 		</div>
 
-        <a class="button" th:href="@{'/dipendente/addSpecie/' + ${ambiente.id}}"><div> Inserisci nuova specie</div></a>
-
-	    </div>
+        <div><a class="button" th:href="@{'/dipendente/addSpecie/' + ${ambiente.id}}"> Inserisci nuova specie</a></div>
+        
+        <div class="button"> 
+	  <a th:href="@{'/dipendente/editAmbiente/'+${ambiente.id}}">modifica ambiente</a>
+    </div>
+    
+    <div class="button"> 
+	  <a th:href="@{'/dipendente/removeAmbiente/'+${ambiente.id}}">rimuovi ambiente</a>
+    </div>
 	</body>
 </html>
