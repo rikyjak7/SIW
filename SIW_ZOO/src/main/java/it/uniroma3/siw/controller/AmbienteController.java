@@ -20,68 +20,71 @@ import it.uniroma3.siw.model.Ambiente;
 import it.uniroma3.siw.model.Specie;
 import jakarta.validation.Valid;
 
-
 @Controller
-public class AmbienteController{
-	
-	@Autowired AmbienteService ambienteService;
-	@Autowired AmbienteValidator ambienteValidator;
-	
+public class AmbienteController {
+
+	@Autowired
+	AmbienteService ambienteService;
+	@Autowired
+	AmbienteValidator ambienteValidator;
+
 	@GetMapping("/ambienti")
 	public String ambienti(Model model) {
-		model.addAttribute("ambienti",this.ambienteService.getAmbienti());
+		model.addAttribute("ambienti", this.ambienteService.getAmbienti());
 		return "ambienti.html";
 	}
-	
+
 	@GetMapping("/dipendente/ambientiDip")
 	public String ambientiResponsabile(Model model) {
-		model.addAttribute("ambienti",this.ambienteService.getAmbienti());
+		model.addAttribute("ambienti", this.ambienteService.getAmbienti());
 		return "dipendente/ambientiDip.html";
 	}
-	
+
 	@PostMapping("/ambienti")
-	public String addAmbiente( @Valid @ModelAttribute("ambiente") Ambiente ambiente,BindingResult bindingResult, Model model){
+	public String addAmbiente(@Valid @ModelAttribute("ambiente") Ambiente ambiente, BindingResult bindingResult,
+			Model model) {
 		try {
-		    model.addAttribute("ambiente", this.ambienteService.save(ambiente, bindingResult));
-		    model.addAttribute("elencoSpecie", new LinkedList<Specie>());
-		    return "dipendente/ambienteDip.html";
-		} catch(IOException e) {
+			model.addAttribute("ambiente", this.ambienteService.save(ambiente, bindingResult));
+			model.addAttribute("elencoSpecie", new LinkedList<Specie>());
+			return "dipendente/ambienteDip.html";
+		} catch (IOException e) {
 			return "dipendente/formAddAmbiente.html";
 		}
-	}   
-	
+	}
+
 	@GetMapping("/dipendente/editAmbiente/{ambienteId}")
 	public String formEditAmbiente(@PathVariable("ambienteId") Long ambienteId, Model model) {
 		model.addAttribute("ambiente", this.ambienteService.getAmbiente(ambienteId));
 		return "dipendente/editAmbiente.html";
 	}
-	
+
 	@PostMapping("/dipendente/editAmbiente/{ambienteId}")
-	public String editAmbiente(@Valid @ModelAttribute("ambiente") Ambiente newAmbiente, @PathVariable("ambienteId") Long ambienteId,
+	public String editAmbiente(@Valid @ModelAttribute("ambiente") Ambiente newAmbiente,
+			@PathVariable("ambienteId") Long ambienteId,
 			BindingResult bindingResult, Model model) {
+		model.addAttribute("elencoSpecie", this.ambienteService.getSpecieAmbiente(ambienteId));
 		try {
 			model.addAttribute("ambiente", this.ambienteService.saveEdit(newAmbiente, ambienteId, bindingResult));
-			model.addAttribute("elencoSpecie", this.ambienteService.getSpecieAmbiente(ambienteId));
 			return "dipendente/ambienteDip.html";
-		} catch(IOException e) {
+		} catch (IOException e) {
 			return "dipendente/editAmbiente.html";
 		}
 	}
-	
+
 	@GetMapping("/ambienti/{id}")
-	public String ambiente(@PathVariable("id") Long id,Model model) {
-		model.addAttribute("ambiente",this.ambienteService.getAmbiente(id));
-		model.addAttribute("elencoSpecie",this.ambienteService.getSpecieAmbiente(id));
+	public String ambiente(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("ambiente", this.ambienteService.getAmbiente(id));
+		model.addAttribute("elencoSpecie", this.ambienteService.getSpecieAmbiente(id));
 		return "ambiente.html";
 	}
-	
+
 	@GetMapping("/dipendente/ambientiDip/{id}")
-	public String ambienteDip(@PathVariable("id") Long id,Model model) {
-		model.addAttribute("ambiente",this.ambienteService.getAmbiente(id));
-		model.addAttribute("elencoSpecie",this.ambienteService.getSpecieAmbiente(id));
+	public String ambienteDip(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("ambiente", this.ambienteService.getAmbiente(id));
+		model.addAttribute("elencoSpecie", this.ambienteService.getSpecieAmbiente(id));
 		return "dipendente/ambienteDip.html";
 	}
-	
+
 	@GetMapping("/dipendente/formAddAmbiente")
 	public String formAddAmbiente(Model model) {
 		model.addAttribute("ambiente", new Ambiente());

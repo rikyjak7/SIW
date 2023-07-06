@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,7 +39,7 @@ public class Ambiente{
 	@OneToMany
 	private List<Personale> dipendente;
 	
-	@OneToMany(mappedBy="ambienteOspitante")
+	@OneToMany(fetch = FetchType.EAGER,mappedBy="ambienteOspitante" )
 	private List<Specie> specieOspitate;
 	
 	@Override
