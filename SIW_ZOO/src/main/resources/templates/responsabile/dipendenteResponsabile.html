@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="/css.css?version=3" />
+
 <head>
 
 </head>
+
 <body>
-<div class="intestazione">
-<header th:replace="~{header.html::intestazione}">header</header>
-</div>
-	
-<div th:if="${dipendente}">
-    <h2 th:text="${dipendente.name} + ' ' + ${dipendente.surname} + ' età: ' + ${dipendente.age}
+    <div class="intestazione">
+        <header th:replace="~{header.html::intestazione}">header</header>
+    </div>
+    <div th:if="${dipendente}">
+        <h2 th:text="${errore}"></h2>
+        <h2 th:text="${dipendente.name} + ' ' + ${dipendente.surname} + ' età: ' + ${dipendente.age}
     + ' stipendio: ' + ${dipendente.stipendio}">
-		 Nome dipendente Cognome dipendente Eta stipendio</h2>
+            Nome dipendente Cognome dipendente Eta stipendio</h2>
         <span><img width="30%" th:src=${dipendente.Image} /></span>
     </div>
     <div th:unless="${dipendente}">Non esiste</div>
-    
-    <div class="button"> 
-	  <a th:href="@{'/responsabile/editDipendente/'+${dipendente.id}}">modifica dipendente</a>
+
+    <div class="button">
+        <a th:href="@{'/responsabile/editDipendente/'+${dipendente.id}}">modifica dipendente</a>
     </div>
-    
-    <div class="button"> 
-	  <a th:href="@{'/responsabile/removeDipendente/'+${dipendente.id}}">rimuovi dipendente</a>
+
+    <div class="button">
+        <a th:href="@{'/responsabile/removeDipendente/'+${dipendente.id}}">rimuovi dipendente</a>
     </div>
-    
-    <div class="button"> 
-	  <a th:href="@{'/responsabile/setAmbienteResponsabile/'+${dipendente.id}}">promuovi a responsabile di un ambiente</a>
+
+    <div class="button">
+        <a th:href="@{'/responsabile/setAmbienteResponsabile/'+${dipendente.id}}">promuovi a responsabile di un
+            ambiente</a>
     </div>
-    
-    <div class="button"> 
-	  <a th:href="@{'/responsabile/modificaStipendio/'+${dipendente.id}}">modifica lo stipendio</a>
+
+    <div class="button">
+        <a th:href="@{'/responsabile/modificaStipendio/'+${dipendente.id}}">modifica lo stipendio</a>
     </div>
-</body>	
+
+    <div class="button">
+        <a th:href="@{'/responsabile/eliminaResp/'+${dipendente.id}}">elimina responsabilità</a>
+    </div>
+</body>
+
 </html>

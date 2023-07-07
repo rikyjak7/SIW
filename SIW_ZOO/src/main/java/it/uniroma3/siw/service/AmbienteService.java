@@ -74,6 +74,7 @@ public class AmbienteService {
 		Personale responsabile= this.personaleRepository.findById(idResponsabile).get();
 		ambiente.setResponsabile(responsabile);
 		responsabile.setIsResponsabile(true);
+		responsabile.setAmbienteControllato(ambiente);
 		this.personaleRepository.save(responsabile);
 		this.ambienteRepository.save(ambiente);
 	}
