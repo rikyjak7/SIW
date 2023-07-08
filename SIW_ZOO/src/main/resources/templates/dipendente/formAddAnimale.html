@@ -9,7 +9,7 @@
 </div>
 
     <h1>Aggiungi un nuovo animale</h1>
-    <form th:action="@{'/animali/'+ ${specie.id}}" method="POST" th:object="${animale}">
+    <form enctype="multipart/form-data" th:action="@{'/animali/'+ ${specie.id}}" method="POST" th:object="${animale}">
       <div>
         <span th:text="${messaggioErrore}">Errore</span>
       </div>
@@ -20,7 +20,7 @@
        <h2> Eta: <span ><input required type="text" th:field="${animale.eta}"/></h2></span>
       </div>
       <div>
-       <h2>URL immagine: <span><input type="url" th:field="${animale.foto}" /></span></h2>
+       <h2>URL immagine: <span><input type="file" th:name="imageFile" accept="/image*" /></span></h2>
       </div>
 	  <div>
        <h2>peso: <span><input type="text" th:field="${animale.pesoInKg}" /></span></h2>

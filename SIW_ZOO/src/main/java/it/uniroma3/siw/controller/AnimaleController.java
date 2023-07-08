@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Ambiente;
 import it.uniroma3.siw.model.Animale;
@@ -45,10 +46,9 @@ public class AnimaleController {
 		return "dipendente/formAddAnimale.html";
 	}
 	@PostMapping("/animali/{id}")
-	public String addAnimaleSpecie( @ModelAttribute("animale") Animale animale,Model model, @PathVariable("id") Long id){
+	public String addAnimaleSpecie( @ModelAttribute("animale") Animale animale,Model model, @PathVariable("id") Long id, MultipartFile imageFile){
 		Animale newAnimale= new Animale(animale.getNome(),animale.getFoto(),animale.getEta(),animale.getDescrizione(),animale.getPesoInKg());
-		specieService.addAnimale(newAnimale,id);
-		model.addAttribute("animale", newAnimale);
+		model.addAttribute("animale", this.specieService.addAnimale(newAnimale, id, imageFile));
 		return "animale.html";
 	}   
 	@PostMapping("/animali")

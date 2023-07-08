@@ -10,7 +10,7 @@
 </div>
             <div class="data-container">
                 <div class="left-box">
-                    <img width="100%" height="100%" th:src="${animale.foto}" alt="Image">
+                    <img width="100%" height="100%" th:src="@{'data:image;base64,'+ ${animale.foto}}" alt="Image">
                 </div>
 
                 <div class="right-box">
