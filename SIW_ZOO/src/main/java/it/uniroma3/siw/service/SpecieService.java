@@ -53,7 +53,7 @@ public class SpecieService {
 		return this.specieRepository.findAll();
 	}
 
-	public Object findByProvenienza(String provenienza) {
+	public List<Specie> findByProvenienza(String provenienza) {
 		return this.specieRepository.findByProvenienza(provenienza);
 	}
 
@@ -63,7 +63,7 @@ public class SpecieService {
 		this.animaleRepository.save(newAnimale);
 	}
 
-	public Object addAnimale(Animale newAnimale, Long id, MultipartFile imageFile) {
+	public Animale addAnimale(Animale newAnimale, Long id, MultipartFile imageFile) {
 		String base64Image;
 		try {
 			base64Image = Base64.getEncoder().encodeToString(imageFile.getBytes());

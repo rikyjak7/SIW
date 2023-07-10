@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Ambiente;
 import it.uniroma3.siw.model.Personale;
@@ -34,6 +35,7 @@ public class PersonaleController {
 	@Autowired
 	AmbienteService ambienteService;
 
+	
 	@GetMapping("/loginPage")
 	public String login(Model model) {
 		return "login.html";
@@ -85,10 +87,10 @@ public class PersonaleController {
 
 	@PostMapping("/responsabile/staffResponsabile")
 	public String newDipendente(@Valid @ModelAttribute("dipendente") Personale personale, BindingResult bindingResult,
-			Model model) {
+			Model model,MultipartFile imageFile) {
 
 		try {
-			model.addAttribute("dipendente", this.personaleService.save(personale, bindingResult));
+			model.addAttribute("dipendente", this.personaleService.save(personale, bindingResult,imageFile));
 			return "responsabile/dipendenteResponsabile.html";
 		} catch (IOException e) {
 			return "responsabile/formAddDipendente.html";

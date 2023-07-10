@@ -1,6 +1,7 @@
 package it.uniroma3.siw.service;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Personale;
 import it.uniroma3.siw.repository.PersonaleRepository;
@@ -38,10 +40,16 @@ public class PersonaleService {
 	}
 
 	@Transactional
-	public Personale save(Personale personale, BindingResult bindingResult) throws IOException {
-
+	public Personale save(Personale personale, BindingResult bindingResult, MultipartFile image) throws IOException {
+		String base64Image; 
 		this.personaleValidator.validate(personale, bindingResult);
 		if (!bindingResult.hasErrors()) {
+			try {
+			base64Image = Base64.getEncoder().encodeToString(image.getBytes());
+			personale.setImage(base64Image);	
+			} catch (IOException e) {
+				// TODO: handle exception
+			}
 			return this.personaleRepository.save(personale);
 		} else {
 			throw new IOException();

@@ -2,6 +2,7 @@ package it.uniroma3.siw.model;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +30,7 @@ public class Personale {
 	@NotNull
     private Integer age;
 	
+	@Column(length = 100000000)//max 10Mb
     private String Image;
     
     @NotNull
