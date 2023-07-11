@@ -1,16 +1,19 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <body>
 	<header th:fragment="intestazione">
 		<a class="logo" href="/">
 			<img height="10%" width="10%" src="/images/siwZoo_logo-removebg-preview.png">
 		</a>
-		<div th:if="${userDetails}">
-			<span th:text="${userDetails.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${userDetails}">
-			<a href="/login">Login</a>
+		<div class="loginText">
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${userDetails}">
+				<a href="/login">Login</a>
+			</div>
 		</div>
 	</header>
 </body>
