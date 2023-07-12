@@ -15,7 +15,7 @@
 		<div class="descrizione"><h1 th:text="${ambiente.descrizione}">Descrizione ambiente </h1> </div> 
 		
 		<div th:if="${elencoSpecie.isEmpty()}">Ambiente vuoto</div>
-		<div id="container">
+		<div class="container">
 			
 			<div class="card" style="margin-top: 2%" th:each="specie: ${elencoSpecie}">
 				<a th:href="@{'/specie' + '/' + ${specie.id}}">

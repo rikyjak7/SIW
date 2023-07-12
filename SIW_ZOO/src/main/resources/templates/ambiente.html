@@ -22,7 +22,7 @@
 		</div>
 
 		<div th:if="${elencoSpecie.isEmpty()}">Ambiente vuoto</div>
-		<div id="container">
+		<div class="container">
 
 			<div class="card" th:each="specie: ${elencoSpecie}">
 				<a th:href="@{'/specie' + '/' + ${specie.id}}">

@@ -44,7 +44,7 @@ public class SpecieController{
 	public String operazioneAddSpecieAmbiente( @PathVariable("idSpecie") Long idSpecie,@PathVariable("idAmbiente") Long idAmbiente,Model model ){
 		Specie specie=this.specieService.addSpecieToAmbiente(idAmbiente,idSpecie);
 		model.addAttribute("specie", specie);
-		return "Index.html";
+		return "responsabile/indexResponsabile.html";
 	}  
 	
 	@GetMapping("/specie/{id}")
