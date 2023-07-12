@@ -7,13 +7,41 @@ body {
   margin: 0;
 }
 
-div.intestazione {
+.intestazione {
   background-color: rgb(255, 255, 255);
   background-image: url("images/sfondoFoglia.jpg");
   width: 100%;
   top: 0;
   left: 0;
 
+}
+
+form{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 2%;
+}
+
+.dip-banner{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /*estetica box*/
+    background-color: rgb(255, 128, 0);
+    border-radius: 10px;
+    box-shadow: 20px 20px rgb(0, 64, 0);
+
+    height: 40%;
+    width: 90%;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 a {
@@ -30,8 +58,6 @@ header .login {
   left: 81%;
   position: relative;
 }
-
-div.main {}
 
 div.titolo {
   float: left;
@@ -95,7 +121,7 @@ div.descrizione {
   border: 2px solid black;
   width: 150px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   text-decoration: none;
   color: black;
@@ -192,9 +218,11 @@ div.descrizione {
 
 .container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  height: 70%;
+  height: 600px;
+  width: 100%;
 }
 
 .loginText {
@@ -203,26 +231,27 @@ div.descrizione {
   float: right;
   margin-top: 1.7%;
   margin-right: 3%;
-  background-color: rgb(255, 255, 255);
+  /*background-color: rgb(255, 255, 255);*/
   color: black;
 }
 
 #colSpecie {
   background-image: url("images/zebre.jpg");
   background-size: contain;
+  height: 250%;
 }
 
 #colStaff {
   background-image: url("images/staff.jpg");
   background-size: contain;
-  height: 235%;
+  height: 188%;
 }
 
 
 #colAmbienti {
   background-image: url("images/acquario.jpg");
   background-size: contain;
-  height: 350%;
+  height: 305%;
 }
 
 .col a {

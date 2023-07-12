@@ -22,11 +22,11 @@
 		</div>
 
 		<div th:if="${elencoSpecie.isEmpty()}">Ambiente vuoto</div>
-		<div id="flex-container">
+		<div id="container">
 
-			<div class="col" th:each="specie: ${elencoSpecie}">
+			<div class="card" th:each="specie: ${elencoSpecie}">
 				<a th:href="@{'/specie' + '/' + ${specie.id}}">
-					<h1 th:text="${specie.nome}">Specie </h1>
+					<h2 th:text="${specie.nome}">Specie </h2>
 				</a>
 			</div>
 		</div>

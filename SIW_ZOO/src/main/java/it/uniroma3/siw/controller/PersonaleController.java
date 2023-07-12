@@ -106,10 +106,10 @@ public class PersonaleController {
 	@PostMapping("/responsabile/editDipendente/{dipendenteId}")
 	public String editDipendente(@Valid @ModelAttribute("dipendente") Personale newDipendente,
 			@PathVariable("dipendenteId") Long dipendenteId,
-			BindingResult bindingResult, Model model) {
+			BindingResult bindingResult, Model model, MultipartFile imageFile) {
 		try {
 			model.addAttribute("dipendente",
-					this.personaleService.saveEdit(newDipendente, dipendenteId, bindingResult));
+					this.personaleService.saveEdit(newDipendente, dipendenteId, bindingResult, imageFile));
 			return "responsabile/dipendenteResponsabile.html";
 		} catch (IOException e) {
 			return "responsabile/editDipendente.html";
@@ -120,7 +120,7 @@ public class PersonaleController {
 	public String removeDipendente(@PathVariable("id") Long id, Model model) {
 
 		try {
-			this.personaleService.removeDip(id, model);
+			this.personaleService.removeDip(id);
 			model.addAttribute("dipendenti", this.personaleService.getDipendenti());
 			model.addAttribute("responsabili", this.personaleService.getAllResponsabili());
 		} catch (IOException e) {

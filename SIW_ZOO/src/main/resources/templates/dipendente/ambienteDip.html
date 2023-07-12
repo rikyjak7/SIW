@@ -4,35 +4,36 @@
 		<link rel="stylesheet" href="/css.css"/>
 	</head>
 	<body>
-		<div class="main">
+		
 		<div class="intestazione">
 <header th:replace="~{header.html::intestazione}">header</header>
 </div>
-
+<div class="main">
 
 		<div class="sottotitolo" > <h1 th:text="${ambiente.nome}">Nome ambiente</h1></div>
 
 		<div class="descrizione"><h1 th:text="${ambiente.descrizione}">Descrizione ambiente </h1> </div> 
 		
 		<div th:if="${elencoSpecie.isEmpty()}">Ambiente vuoto</div>
-		<div id="flex-container">
+		<div id="container">
 			
-			<div class="col" th:each="specie: ${elencoSpecie}">
+			<div class="card" style="margin-top: 2%" th:each="specie: ${elencoSpecie}">
 				<a th:href="@{'/specie' + '/' + ${specie.id}}">
-					<h1 th:text="${specie.nome}" >Specie </h1>
+					<h2 th:text="${specie.nome}" >Specie </h2>
 				</a>
 		 </div>
 	  </div>
 		</div>
 
-        <div><a class="button" th:href="@{'/dipendente/addSpecie/' + ${ambiente.id}}"> Inserisci nuova specie</a></div>
+        <div style="display: flex; justify-content: space-evenly; width: 100%; margin-top: 3%">
+			<div><a class="button" th:href="@{'/dipendente/addSpecie/' + ${ambiente.id}}"> Inserisci nuova specie</a></div>
         
-        <div class="button"> 
-	  <a th:href="@{'/dipendente/editAmbiente/'+${ambiente.id}}">modifica ambiente</a>
+        <div> 
+	  <a class="button" th:href="@{'/dipendente/editAmbiente/'+${ambiente.id}}">modifica ambiente</a>
     </div>
     
-    <div class="button"> 
-	  <a th:href="@{'/dipendente/removeAmbiente/'+${ambiente.id}}">rimuovi ambiente</a>
-    </div>
+    <div> 
+	  <a class="button" th:href="@{'/dipendente/removeAmbiente/'+${ambiente.id}}">rimuovi ambiente</a>
+    </div></div>
 	</body>
 </html>

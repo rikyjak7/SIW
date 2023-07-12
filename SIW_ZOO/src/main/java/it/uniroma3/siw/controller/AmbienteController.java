@@ -90,4 +90,10 @@ public class AmbienteController {
 		model.addAttribute("ambiente", new Ambiente());
 		return "dipendente/formAddAmbiente.html";
 	}
+	
+	@GetMapping("/dipendente/removeAmbiente/{id}")
+	public String removeAmbiente(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("ambienti", this.ambienteService.removeAmbienteAndReturnAll(id));
+		return "dipendente/ambientiDip.html";
+	}
 }

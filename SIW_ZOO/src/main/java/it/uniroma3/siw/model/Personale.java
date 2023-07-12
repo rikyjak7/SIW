@@ -109,12 +109,12 @@ public class Personale {
 	public void setStipendio(Float stipendio) {
 		this.stipendio = stipendio;
 	}
-	private Boolean isResponsabile;
+	private boolean isResponsabile=false;
 	
-	public Boolean getIsResponsabile() {
+	public boolean getIsResponsabile() {
 		return isResponsabile;
 	}
-	public void setIsResponsabile(Boolean isResponsabile) {
+	public void setIsResponsabile(boolean isResponsabile) {
 		this.isResponsabile = isResponsabile;
 	}
 }

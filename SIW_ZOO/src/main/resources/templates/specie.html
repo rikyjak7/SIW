@@ -5,7 +5,7 @@
 		<header th:replace="~{header.html::intestazione}">header</header>
 	</div>
 
-	<link rel="stylesheet" href="/css.css">
+	<link rel="stylesheet" href="/css.css?version=3">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
 		<div th:if="${animali==null or animali.isEmpty()}">Non ci sono animali nel sistema</div>
 		<div th:unless="${animali==null or animali.isEmpty()}">
 			<div id="flex-container">
-				<div th:each="animale: ${animali}" class="col" ID="animale">
+				<div th:each="animale: ${animali}" class="col" id="animale">
 					<a  th:text="${animale.nome}" th:href="@{'/animali/'+${animale.id}}">
 						<div> Animale 1</div>
 					</a>

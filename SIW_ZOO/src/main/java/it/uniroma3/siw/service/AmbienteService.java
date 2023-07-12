@@ -79,4 +79,14 @@ public class AmbienteService {
 		this.ambienteRepository.save(ambiente);
 	}
 	
+	@Transactional
+	public Iterable<Ambiente> removeAmbienteAndReturnAll(Long id){
+		Ambiente ambiente=this.ambienteRepository.findById(id).get();
+		for(Specie s: ambiente.getSpecieOspitate()) {
+			s.setAmbienteOspitante(null);
+		}
+		this.ambienteRepository.delete(ambiente);
+		return this.ambienteRepository.findAll();
+	}
+	
 }

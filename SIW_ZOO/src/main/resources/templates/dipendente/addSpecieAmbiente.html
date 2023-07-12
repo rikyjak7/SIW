@@ -8,15 +8,17 @@
 <header th:replace="~{header.html::intestazione}">header</header>
 </div>
 
+<div class="main">
     <h1>Aggiungi una nuova specie a questo ambiente</h1>
     <div th:if="${elencoSpecie.isEmpty()}">Non ci sono specie nel sistema</div>
-    <div id="flex-container">
+    <div id="container">
 			
-			<div class="col" th:each="specie: ${elencoSpecie}">
+			<div class="card" th:each="specie: ${elencoSpecie}">
 				<a th:href="@{'/operazioneAddSpecie' + '/' + ${specie.id} + '/' + ${ambiente.id}}">
 					<h1 th:text="${specie.nome}" >Specie </h1>
 				</a>
 		 </div>  
+    </div>
     </form>
   </body>
 </html>

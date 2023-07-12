@@ -10,7 +10,7 @@
     <div class="intestazione">
         <header th:replace="~{header.html::intestazione}">header</header>
     </div>
-    <div th:if="${dipendente}">
+    <!--<div th:if="${dipendente}">
         <h2 th:text="${errore}"></h2>
         <h2 th:text="${dipendente.name} + ' ' + ${dipendente.surname} + ' età: ' + ${dipendente.age}
     + ' stipendio: ' + ${dipendente.stipendio}">
@@ -18,7 +18,40 @@
             <img width="100%" height="100%" th:src="@{'data:image;base64,'+ ${dipendente.Image}}" alt="Image">
         <span><img width="30%" th:src=${dipendente.Image} /></span>
     </div>
-    <div th:unless="${dipendente}">Non esiste</div>
+    <div th:unless="${dipendente}">Non esiste</div>-->
+    <main class="column" style="margin-top: 2%;">
+        <div class="dip-banner">
+            <div id="dip-image" class="column" style="height:100%; width:40%;">
+                <img th:src="@{'data:image;base64,' + ${dipendente.Image}}"
+                    style="height: 300px; width: 220px;margin: 10px 10px 10px 30px;">
+            </div>
+            <div id="dip-info" style="height:100%; width:60%;">
+                <div>
+                    <h2 th:text="'Nome: '+${dipendente.name}">nome</h2>
+                </div>
+                <hr>
+                <div>
+                    <h2 th:text="'Cognome: '+${dipendente.surname}">cognome</h2>
+                </div>
+                <hr>
+                <div>
+                    <h2 th:text=" 'Età: ' + ${dipendente.age}">età</h2>
+                </div>
+                <hr>
+                <div>
+                    <h2 th:text=" 'Stipendio: ' + ${dipendente.stipendio} + '€'">stipendio</h2>
+                </div>
+                <!--<div th:if="@{dipendente.ambienteControllato!=null}">
+					<h2 th:text=" 'Responsabile di: ' + ${dipendente.ambienteControllato.nome}">ambiente</h2>
+				</div>
+				<div th:unless="@{dipendente.ambienteControllato!=null}">
+					<h2> Il seguente dipendente non è responsabile di alcun ambiente</h2>
+				</div>-->
+            </div>
+        </div>
+    </main>
+    
+    <div class="buttons" style="display: flex; width: 100%; justify-content: space-evenly; margin-top: 2%">
 
     <div class="button">
         <a th:href="@{'/responsabile/editDipendente/'+${dipendente.id}}">modifica dipendente</a>
@@ -39,6 +72,7 @@
 
     <div class="button">
         <a th:href="@{'/responsabile/eliminaResp/'+${dipendente.id}}">elimina responsabilità</a>
+    </div>
     </div>
 </body>
 

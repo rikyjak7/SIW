@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.model.Ambiente;
 import it.uniroma3.siw.model.Personale;
 import it.uniroma3.siw.repository.PersonaleRepository;
 import it.uniroma3.siw.validator.PersonaleValidator;
@@ -57,7 +58,8 @@ public class PersonaleService {
 	}
 
 	@Transactional
-	public Personale saveEdit(Personale newDipendente, Long id, BindingResult bindingResult) throws IOException {
+	public Personale saveEdit(Personale newDipendente, Long id, BindingResult bindingResult,
+			MultipartFile imageFile) throws IOException {
 
 		this.personaleValidator.validate(newDipendente, bindingResult);
 		if (!bindingResult.hasFieldErrors()) {
@@ -65,9 +67,16 @@ public class PersonaleService {
 			dipendente.setName(newDipendente.getName());
 			dipendente.setSurname(newDipendente.getSurname());
 			dipendente.setAge(newDipendente.getAge());
-			dipendente.setImage(newDipendente.getImage());
 			dipendente.setStipendio(newDipendente.getStipendio());
 			dipendente.setIsResponsabile(newDipendente.getIsResponsabile());
+			dipendente.setImage(newDipendente.getImage());
+			
+			try {
+				if (imageFile.getBytes().length != 0) {
+				String base64Image = Base64.getEncoder().encodeToString(imageFile.getBytes());
+				dipendente.setImage(base64Image);
+				}
+			} catch (IOException e) {}
 			return this.personaleRepository.save(dipendente);
 		} else {
 			throw new IOException();
@@ -75,13 +84,22 @@ public class PersonaleService {
 	}
 
 	@Transactional
-	public void removeDip(Long id, Model model) throws IOException {
-		
-		if (!(this.personaleRepository.findById(id).get().getIsResponsabile() == true)) {
+	public void removeDip(Long id) throws IOException {
+
+		if(!(this.personaleRepository.findById(id).get().getIsResponsabile()==true)) {
 			this.personaleRepository.deleteById(id);
 		} else {
 			throw new IOException();
 		}
+		/*Personale dipendente=this.personaleRepository.findById(id).get();
+		if (dipendente.getIsResponsabile() == true) {
+			for(Ambiente a:dipendente.getAmbienteControllato()) {
+				a.setResponsabile(null);
+			}*/
+			
+		/*} else {
+			throw new IOException();
+		}*/
 	}
 
 	@Transactional
@@ -99,6 +117,7 @@ public class PersonaleService {
 		if(dipendente.getIsResponsabile() == true)
 		{
 			dipendente.getAmbienteControllato().setResponsabile(null);
+			dipendente.setAmbienteControllato(null);
 			dipendente.setIsResponsabile(false);
 		}
 	}

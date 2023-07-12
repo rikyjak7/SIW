@@ -23,11 +23,8 @@
        <h2> Superficie: <span ><input type="text" th:field="${ambiente.superficie}"/></span>
        <span th:if="${#fields.hasErrors('superficie')}" th:errors="*{superficie}">Errore</span></h2>
       </div>
-      <div>
-       <h2>URL immagine: <span><input type="url" th:field="${ambiente.image}" /></span></h2>
-      </div>
 	  <div>
-       <h2>descrizione: <span><input type="text" th:field="${ambiente.descrizione}" /></span>
+       <h2>descrizione: <span><textarea th:field="${ambiente.descrizione}" /></span>
        <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}">Errore</span></h2>
       </div>
       <div>

@@ -6,9 +6,9 @@
 </head>
 
 <body>
-	<div class="intestazione">
+	
 		<header th:replace="~{header.html::intestazione}">header</header>
-	</div>
+	
 	<div class="main">
 
 		<div th:if="${elencoSpecie.isEmpty()}">
@@ -20,10 +20,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="button">
-		<a th:href="@{/dipendente/formAddSpecie}"> Inserisci nuova specie</a>
+	<div style="display: flex; justify-content: center; width: 100%;">
+		<a class="button" th:href="@{/dipendente/formAddSpecie}"> Inserisci nuova specie</a>
 	</div>
 
+    <div style="display: flex; justify-content: space-evenly;">
 	<form th:action="@{/dipendente/elencoSpecie}" method="post">
 		<h2> Filtra per provenienza: </h2> <span><input type="text" th:value="${provenienza}" name="provenienza"></span>
 		<span><button type="submit">Conferma</button></span>
@@ -34,7 +35,7 @@
 		<span>minimo:<input type="number" th:value="${pesoInKg}" name="min"></span>
 		<span>massimo:<input type="number" th:value="${pesoInKg}" name="max"></span>
 		<span><button type="submit">Conferma</button></span>
-	</form>
+	</form></div>
 
 </body>
 

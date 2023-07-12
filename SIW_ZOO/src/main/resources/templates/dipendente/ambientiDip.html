@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="/css.css?version=3" />
+<link rel="stylesheet" th:href="@{/css.css}" />
 <head>
 
 </head>
@@ -9,16 +9,20 @@
 <header th:replace="~{header.html::intestazione}">header</header>
 </div>
 
-<div th:if="${ambienti.isEmpty()}">
-		<h2>Non ci sono ambienti nel sistema</h2>
-</div>
-<div class="container" >
-	<div class="card" th:each="ambiente : ${ambienti}">
-		<a th:href="@{'/dipendente/ambientiDip/' + ${ambiente.id}}" th:text="${ambiente.nome}">NOME AMBIENTE</a>
+<div class="main">
+		
+		<div th:if="${ambienti.isEmpty()}">
+			<h2>Non ci sono ambienti nel sistema</h2>
+		</div>
+
+		<div class="container">
+			<div class="card" th:each="ambiente : ${ambienti}">
+				<a th:href="@{'/dipendente/ambientiDip/' + ${ambiente.id}}" th:text="${ambiente.nome}">NOME AMBIENTE</a>
+			</div>
+		</div>
 	</div>
-</div>
-<div class="button"> 
-	<a th:href="@{/dipendente/formAddAmbiente}">aggiungi ambiente</a>
+<div style="display: flex; justify-content: center; width: 100%;"> 
+	<a class="button" th:href="@{/dipendente/formAddAmbiente}">aggiungi ambiente</a>
 </div>
 </body>
 </html>

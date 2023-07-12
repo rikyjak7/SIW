@@ -2,13 +2,14 @@
 
 <head>
 	<title>SIW Zoo</title>
-	<link rel="stylesheet" href="css.css" />
+	<link rel="stylesheet" href="/css.css?version=3" />
 </head>
 
 <body>
-	<div class="intestazione">
+	
 		<header th:replace="~{header.html::intestazione}">header</header>
-	</div>
+	
+	
 	<div class="main">
 		
 
@@ -25,6 +26,7 @@
 		<a  th:href="@{/dipendente/formAddSpecie}"> Inserisci nuova specie</a>
 	</div>-->
 
+    <div style="display: flex; justify-content: space-evenly;">
 	<form th:action="@{/elencoSpecie}" method="post">
 		<h2> Filtra per provenienza: </h2> <span><input type="text" th:value="${provenienza}" name="provenienza"></span>
 		<span><button type="submit">Conferma</button></span>
@@ -35,7 +37,7 @@
 		<span>minimo:<input type="number" th:value="${pesoInKg}" name="min"></span>
 		<span>massimo:<input type="number" th:value="${pesoInKg}" name="max"></span>
 		<span><button type="submit">Conferma</button></span>
-	</form>
+	</form></div>
 
 </body>
 

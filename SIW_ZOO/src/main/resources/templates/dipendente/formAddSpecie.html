@@ -22,7 +22,7 @@
        <span th:if="${#fields.hasErrors('provenienza')}" th:errors="*{provenienza}">Errore</span></h2>
       </div>
 	  <div>
-       <h2>descrizione: <span><input type="text" th:field="${specie.descrizione}" /></span>
+       <h2>descrizione: <span><textarea th:field="${specie.descrizione}" /></span>
        <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}">Errore</span></h2>
       </div>
       <div>

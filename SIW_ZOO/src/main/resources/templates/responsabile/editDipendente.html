@@ -26,8 +26,8 @@
        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Errore</span></h2>
       </div>
       <div>
-       <h2> Foto: <span><input type="text" th:field="${dipendente.Image}" /></span></h2>
-      </div>
+      <h2>Foto: <span><input type="file" th:name="imageFile" accept="/image*" /></span></h2>
+    </div>
       <div>
        <h2> Stipendio: <span><input type="text" th:field="${dipendente.stipendio}" /></span>
        <span th:if="${#fields.hasErrors('stipendio')}" th:errors="*{stipendio}">Errore</span></h2>
