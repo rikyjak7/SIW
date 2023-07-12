@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="/css.css?version=3" />
+
 <head>
 
 </head>
-<div class="main">
+
 <div class="intestazione">
-<header th:replace="~{header.html::intestazione}">header</header>
+	<header th:replace="~{header.html::intestazione}">header</header>
 </div>
-<div id="flex-container">
-	<div class="col">
-		<a th:href="@{/dipendente/elencoSpecieDipendente}">SPECIE</a>
+<div class="main">
+
+	<div id="flex-container">
+		<div class="col" id="colSpecie">
+			<a th:href="@{/dipendente/elencoSpecieDipendente}">SPECIE</a>
+		</div>
+		<div class="col" id="colStaff">
+			<a th:href="@{/staff}">STAFF</a>
+		</div>
+		<div class="col" id="colAmbienti">
+			<a th:href="@{/dipendente/ambientiDip}">AMBIENTI</a>
+		</div>
 	</div>
-	<div class="col">
-		<a th:href="@{/staff}">STAFF</a>
-	</div>
-	<div class="col">
-		<a th:href="@{/dipendente/ambientiDip}">AMBIENTI</a>
-	</div>
-</div>
 </div>
 </body>
+
 </html>

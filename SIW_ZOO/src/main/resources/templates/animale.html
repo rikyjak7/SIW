@@ -1,44 +1,45 @@
 <html>
-    <head>
-		<title>SIW Zoo</title>
-		<link rel="stylesheet" href="/css.css"/>
-	</head>
-	<body>
-		<div class="main">
-		<div class="intestazione">
-<header th:replace="~{header.html::intestazione}">header</header>
-</div>
-            <div class="data-container">
-                <div class="left-box">
-                    <img width="100%" height="100%" th:src="@{'data:image;base64,'+ ${animale.foto}}" alt="Image">
-                </div>
 
-                <div class="right-box">
-                    <div class="info-box">
-                        <h2>Nome:</h2>
-                        <p th:text="${animale.nome}">nome</p>
-                    </div>
-                    <div class="info-box">
-                        <h2>Peso animale:</h2>
-                        <p th:text="${animale.pesoInKg}">peso</p>
-                    </div>
-                    <div class="info-box">
-                        <h2>Specie:</h2>
-                        <p th:text="${animale.animal_specie.nome}">specie</p>
-                    </div>
-                    <div class="info-box">
-                        <h2>Età:</h2>
-                        <p th:text="${animale.eta}">eta</p>
-                    </div>
-                    <div class="info-box">
-                        <h2>Descrizione:</h2>
-                        <p th:text="${animale.descrizione}">descrizione</p>
-                    </div>
+<head>
+    <title>SIW Zoo</title>
+    <link rel="stylesheet" href="/css.css" />
+</head>
+
+
+<body>
+    <div class="intestazione">
+        <header th:replace="~{header.html::intestazione}">header</header>
+    </div>
+    <div class="main">
+        <div class="data-container">
+            <div class="left-box">
+                <img width="100%" height="100%" th:src="@{'data:image;base64,'+ ${animale.foto}}" alt="Image">
+            </div>
+
+            <div class="right-box">
+                <div class="info-box">
+                    <h2>Nome:</h2>
+                    <p th:text="${animale.nome}">nome</p>
+                </div>
+                <div class="info-box">
+                    <h2>Peso animale:</h2>
+                    <p th:text="${animale.pesoInKg}">peso</p>
+                </div>
+                <div class="info-box">
+                    <h2>Specie:</h2>
+                    <p th:text="${animale.animal_specie.nome}">specie</p>
+                </div>
+                <div class="info-box">
+                    <h2>Età:</h2>
+                    <p th:text="${animale.eta}">eta</p>
+                </div>
+                <div class="info-box">
+                    <h2>Descrizione:</h2>
+                    <p th:text="${animale.descrizione}">descrizione</p>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
-
-
-

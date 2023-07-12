@@ -1,32 +1,40 @@
 <html>
-    <head>
-		<title>SIW Zoo</title>
-		<link rel="stylesheet" href="/css.css"/>
-	</head>
-	<body>
-		<div class="main">
-		<div class="intestazione">
-<header th:replace="~{header.html::intestazione}">header</header>
-</div>
+
+<head>
+	<title>SIW Zoo</title>
+	<link rel="stylesheet" href="/css.css" />
+</head>
+
+<body>
+	<div class="intestazione">
+		<header th:replace="~{header.html::intestazione}">header</header>
+	</div>
+	<div class="main">
 
 
-		<div class="sottotitolo" > <h1 th:text="${ambiente.nome}">Nome ambiente</h1></div>
 
-		<div class="descrizione"><h1 th:text="${ambiente.descrizione}">Descrizione ambiente </h1> </div> 
-		
-		<div th:if="${elencoSpecie.isEmpty()}">Ambiente vuoto</div>
-		<div id="flex-container">
-			
-			<div class="col" th:each="specie: ${elencoSpecie}">
-				<a th:href="@{'/specie' + '/' + ${specie.id}}">
-					<h1 th:text="${specie.nome}" >Specie </h1>
-				</a>
-		 </div>
-	  </div>
+		<div class="sottotitolo">
+			<h1 th:text="${ambiente.nome}">Nome ambiente</h1>
 		</div>
 
-        <!--<a class="button" th:href="@{'/dipendente/addSpecie/' + ${ambiente.id}}"><div> Inserisci nuova specie</div></a>
+		<div class="descrizione">
+			<h1 th:text="${ambiente.descrizione}">Descrizione ambiente </h1>
+		</div>
+
+		<div th:if="${elencoSpecie.isEmpty()}">Ambiente vuoto</div>
+		<div id="flex-container">
+
+			<div class="col" th:each="specie: ${elencoSpecie}">
+				<a th:href="@{'/specie' + '/' + ${specie.id}}">
+					<h1 th:text="${specie.nome}">Specie </h1>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!--<a class="button" th:href="@{'/dipendente/addSpecie/' + ${ambiente.id}}"><div> Inserisci nuova specie</div></a>
 
 	    </div>-->
-	</body>
+</body>
+
 </html>

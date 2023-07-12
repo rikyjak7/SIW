@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="/css.css" />
-  </head>
-  <body>
-	<div class="intestazione">
-<header th:replace="~{header.html::intestazione}">header</header>
-</div>
 
-    <h1>Seleziona l'ambiente </h1>
-    <div th:if="${ambienti.isEmpty()}">Non ci sono ambienti nel sistema</div>
-    <div id="flex-container">
-			
-			<div class="col" th:each="ambiente: ${ambienti}">
-				<a th:href="@{'/operazioneAddResponsabile' + '/' + ${dipendente.id} + '/' + ${ambiente.id}}">
-					<h1 th:text="${ambiente.nome}" >Ambiente </h1>
-				</a>
-		 </div>  
-  </body>
+<head>
+  <link rel="stylesheet" href="/css.css" />
+</head>
+
+<body>
+  <div class="intestazione">
+    <header th:replace="~{header.html::intestazione}">header</header>
+  </div>
+
+  <h1>Seleziona l'ambiente </h1>
+  <div th:if="${ambienti.isEmpty()}">Non ci sono ambienti nel sistema</div>
+  <div id="flex-container">
+
+    <div class="col" th:each="ambiente: ${ambienti}">
+      <a th:href="@{'/operazioneAddResponsabile' + '/' + ${dipendente.id} + '/' + ${ambiente.id}}">
+        <h1 th:text="${ambiente.nome}">Ambiente </h1>
+      </a>
+    </div>
+</body>
+
 </html>

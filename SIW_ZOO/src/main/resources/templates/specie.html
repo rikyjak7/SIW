@@ -1,26 +1,37 @@
 <html>
-    <head>
-		<div class="intestazione">
-<header th:replace="~{header.html::intestazione}">header</header>
-</div>
 
-		<link rel="stylesheet" href="/css.css">
-	</head>
-	<body>
-		<div class="main">
+<head>
+	<div class="intestazione">
+		<header th:replace="~{header.html::intestazione}">header</header>
+	</div>
 
-		<div class="sottotitolo"> <h1 th:text="${specie.nome}">Nome specie </h1> </div>
+	<link rel="stylesheet" href="/css.css">
+</head>
 
-		<div class="descrizione"> <h1 th:text="${specie.descrizione}">Descrizione specie </h1> </div> 
-		
-		<div th:if="${animali==null or animali.isEmpty()}">Non ci sono animali nel sistema</div>
-	  <div th:unless="${animali==null or animali.isEmpty()}"> 
-		  
-		<div th:each="animale: ${animali}" id="flex-container">
-			<a class="col" th:text="${animale.nome}" th:href="@{'/animali/'+${animale.id}}"><div> Animale 1</div></a>
+<body>
+	<div class="main">
+
+		<div class="sottotitolo">
+			<h1 th:text="${specie.nome}">Nome specie </h1>
 		</div>
-	    </div>
-	    <!--<a class="button" th:href="@{'/dipendente/formAddAnimale/' + ${specie.id}}">
+
+		<div class="descrizione">
+			<h1 th:text="${specie.descrizione}">Descrizione specie </h1>
+		</div>
+
+		<div th:if="${animali==null or animali.isEmpty()}">Non ci sono animali nel sistema</div>
+		<div th:unless="${animali==null or animali.isEmpty()}">
+			<div id="flex-container">
+				<div th:each="animale: ${animali}" class="col" ID="animale">
+					<a  th:text="${animale.nome}" th:href="@{'/animali/'+${animale.id}}">
+						<div> Animale 1</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--<a class="button" th:href="@{'/dipendente/formAddAnimale/' + ${specie.id}}">
 			<div> Inserisci nuovo animale </div></a>-->
-	</body>
+</body>
+
 </html>
