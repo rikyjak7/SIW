@@ -14,6 +14,7 @@ import it.uniroma3.siw.model.Animale;
 import it.uniroma3.siw.repository.AmbienteRepository;
 import it.uniroma3.siw.repository.AnimaleRepository;
 import it.uniroma3.siw.repository.SpecieRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Service
@@ -24,7 +25,8 @@ public class SpecieService {
 	AmbienteRepository ambienteRepository;
 	@Autowired
 	AnimaleRepository animaleRepository;
-
+	
+	@Transactional
 	public void saveSpecie(@Valid Specie specie) {
 		this.specieRepository.save(specie);
 	}
@@ -38,31 +40,37 @@ public class SpecieService {
 		this.ambienteRepository.save(ambiente);
 		return specie;
 	}
-
+	
+	@Transactional
 	public Specie getSpecie(Long id) {
 
 		return this.specieRepository.findById(id).get();
 	}
-
+	
+	@Transactional
 	public List<Animale> getAnimaliSpecie(Long id) {
 
 		return this.specieRepository.findById(id).get().getAnimali();
 	}
-
+	
+	@Transactional
 	public Iterable<Specie> getAll() {
 		return this.specieRepository.findAll();
 	}
-
+	
+	@Transactional
 	public List<Specie> findByProvenienza(String provenienza) {
 		return this.specieRepository.findByProvenienza(provenienza);
 	}
-
+	
+	@Transactional
 	public void addAnimale(Animale newAnimale, Long id) {
 		Specie specie = this.specieRepository.findById(id).get();
 		newAnimale.setAnimal_specie(specie);
 		this.animaleRepository.save(newAnimale);
 	}
-
+	
+	@Transactional
 	public Animale addAnimale(Animale newAnimale, Long id, MultipartFile imageFile) {
 		String base64Image;
 		try {

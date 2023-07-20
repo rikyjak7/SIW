@@ -21,6 +21,8 @@ public class Animale {
 	private String foto;
 	
 	private Integer eta;
+
+	@Column(length = 2000)
 	private String descrizione;
 	private Integer pesoInKg;
 	

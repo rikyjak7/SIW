@@ -19,7 +19,7 @@
 			<h1 th:text="${specie.descrizione}">Descrizione specie </h1>
 		</div>
 
-		<div th:if="${animali==null or animali.isEmpty()}">Non ci sono animali nel sistema</div>
+		<div th:if="${animali==null or animali.isEmpty()}">Non ci sono animali di questa specie nel sistema</div>
 		<div th:unless="${animali==null or animali.isEmpty()}">
 			<div id="flex-container">
 				<div th:each="animale: ${animali}" class="col" id="animale">
